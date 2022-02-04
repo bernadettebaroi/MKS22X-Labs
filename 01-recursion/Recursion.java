@@ -1,5 +1,9 @@
 public class Recursion {
-
+  public static void main(String[] args) {
+    printAllWords(3);
+    char[] list = {'a','b','c'};
+    printNoDoubleLetterWords(3,list);
+  }
   /*Print all words that are made of the letters a-e inclusive.
   *@param length : the length of the words that are to be printed
   */
@@ -43,7 +47,11 @@ public class Recursion {
       if (length > 0) {
         for (int i = 0; i < letters.length;i++) {
           char c = letters[i];
-          printNoDoubleLetterWords(length-1,word+c,letters);
+          if (c == charAt()) {
+            printNoDoubleLetterWords(length,word,letters);
+          } else {
+            printNoDoubleLetterWords(length-1,word+c,letters);
+          }
         }
       } else {
         System.out.println(word);
