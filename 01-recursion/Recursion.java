@@ -1,8 +1,11 @@
 public class Recursion {
   public static void main(String[] args) {
-    printAllWords(3);
-    char[] list = {'a','b','c'};
-    printNoDoubleLetterWords(3,list);
+    //printAllWords(3);
+    //char[] list = {'a','b','c'};
+    //printNoDoubleLetterWords(3,list);
+    //String ans = "abcd";
+    //System.out.println(reverse(ans));
+    System.out.println(sqrt(100));
   }
   /*Print all words that are made of the letters a-e inclusive.
   *@param length : the length of the words that are to be printed
@@ -17,7 +20,7 @@ public class Recursion {
   */
   public static void printAllWords(int length,String word){
     if (length > 0) {
-      for (char c = 'a'; c <= 'e'; c++) {
+      for (char c = 'a'; c <= 'c'; c++) {
         printAllWords(length-1,word+c);
       }
     } else {
@@ -44,18 +47,70 @@ public class Recursion {
   *@param letters: the letters you should be using
   */
   public static void printNoDoubleLetterWords(int length,String word,char[]letters){
-      if (length > 0) {
-        for (int i = 0; i < letters.length;i++) {
-          char c = letters[i];
-          if (c == charAt()) {
-            printNoDoubleLetterWords(length,word,letters);
-          } else {
-            printNoDoubleLetterWords(length-1,word+c,letters);
-          }
+    if (length == 0) {
+      System.out.println("");
+    }
+    if (length > 0) {
+      for (int i = 0; i < letters.length;i++) {
+        char c = letters[i];
+        if (word.length() == 0 || c != word.charAt(word.length()-1)) {
+          printNoDoubleLetterWords(length-1,word+c,letters);
         }
-      } else {
-        System.out.println(word);
       }
+    } else {
+      System.out.print(word);
+    }
+  }
+  /*
+  *@param s any string
+  *@return a string that is the reversed version of s, do NOT use built in methods to do so, use recursion.
+  */
+  public static String reverse(String s){
+    if (s.length() == 0) {
+      return "";
+    }
+    if (s.length() == 1) {
+      return s;
+    } else {
+      return s.charAt(s.length()-1) + reverse(s.substring(0,s.length()-1));
+    }
+  }
+
+  /*
+  *@param n any non-negative value you want to take the sqrt of
+  *@return the approximate sqrt of n within a tolerance of 0.001%
+  */
+  public static double sqrt(double n){
+    return sqrt(n,1);
+  }
+
+  public static double sqrt(double n, double guess){
+    if ( 0.001 > Math.abs((guess*guess) - n / n * 100)) {
+      return guess;
+    } else {
+      return sqrt((n),(( n / guess + guess) / 2));
+    }
+  }
+
+  /*
+  *@param length how long the words must be
+  *param word the variable to store the partial solution (should start at "")
+  *@return the number of words that have no adjacent matching letters using the letters a-z.
+  *Repetition allowed except when letters are adjacent.
+  */
+  public static long countNoDoubleLetterWords(int length,String word){
+    //Hint: not a wrapper method, but you must call it starting with "" as your word.
+    return 2;
+  }
+
+
+  /*
+  *@param n any non-negative value
+  *@return the nth term of the fibonacci sequence. 0, 1, 1, 2, 3, 5 etc.
+  */
+  public int fibIter(int n, int f1, int f2){
+    //DO NOT call fibIter more than once
+    return 2;
   }
 
 }
