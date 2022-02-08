@@ -5,7 +5,11 @@ public class Recursion {
     //printNoDoubleLetterWords(3,list);
     //String ans = "abcd";
     //System.out.println(reverse(ans));
-    System.out.println(sqrt(100));
+    //System.out.println(sqrt(100));
+    //System.out.println(fibIter(0, 1, 0));
+    //System.out.println(fibIter(1, 1, 0));
+    //System.out.println(fibIter(2, 1, 0));
+    //System.out.println(fibIter(3, 1, 0));
   }
   /*Print all words that are made of the letters a-e inclusive.
   *@param length : the length of the words that are to be printed
@@ -100,7 +104,12 @@ public class Recursion {
   */
   public static long countNoDoubleLetterWords(int length,String word){
     //Hint: not a wrapper method, but you must call it starting with "" as your word.
-    return 2;
+    for (char x = 'a'; x<='z';x++) {
+      char c = letters[i];
+      if (word.length() == 0 || c != word.charAt(word.length()-1)) {
+        countNoDoubleLetterWords(length-1,word+c);
+      }
+    }
   }
 
 
@@ -108,9 +117,13 @@ public class Recursion {
   *@param n any non-negative value
   *@return the nth term of the fibonacci sequence. 0, 1, 1, 2, 3, 5 etc.
   */
-  public int fibIter(int n, int f1, int f2){
+  public static int fibIter(int n, int f1, int f2){
     //DO NOT call fibIter more than once
-    return 2;
+    if (n > 0) {
+      return fibIter(n-1, f2, f1+f2);
+    } else {
+      return f2;
+    }
   }
 
 }
