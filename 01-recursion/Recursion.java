@@ -10,6 +10,7 @@ public class Recursion {
     //System.out.println(fibIter(1, 1, 0));
     //System.out.println(fibIter(2, 1, 0));
     //System.out.println(fibIter(3, 1, 0));
+    System.out.println(countNoDoubleLetterWords(5,""));
   }
   /*Print all words that are made of the letters a-e inclusive.
   *@param length : the length of the words that are to be printed
@@ -104,12 +105,18 @@ public class Recursion {
   */
   public static long countNoDoubleLetterWords(int length,String word){
     //Hint: not a wrapper method, but you must call it starting with "" as your word.
-    for (char x = 'a'; x<='z';x++) {
-      char c = letters[i];
-      if (word.length() == 0 || c != word.charAt(word.length()-1)) {
-        countNoDoubleLetterWords(length-1,word+c);
+    if (length == 0) {
+      return 1;
+    }
+    long sum = 0;
+    if (length > 0) {
+      for (char i = 'a'; i <= 'z';i++) {
+        if (word.length() == 0 || i != word.charAt(word.length()-1)) {
+          sum += countNoDoubleLetterWords(length-1,word+i);
+        }
       }
     }
+    return sum;
   }
 
 
