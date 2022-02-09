@@ -1,16 +1,16 @@
 public class Recursion {
   public static void main(String[] args) {
-    //printAllWords(3);
-    //char[] list = {'a','b','c'};
-    //printNoDoubleLetterWords(3,list);
-    //String ans = "abcd";
-    //System.out.println(reverse(ans));
-    //System.out.println(sqrt(100));
-    //System.out.println(fibIter(0, 1, 0));
-    //System.out.println(fibIter(1, 1, 0));
-    //System.out.println(fibIter(2, 1, 0));
-    //System.out.println(fibIter(3, 1, 0));
-    System.out.println(countNoDoubleLetterWords(5,""));
+    /*printAllWords(3);
+    char[] list = {'a','b','c'};
+    printNoDoubleLetterWords(3,list);
+    String ans = "abcd";
+    System.out.println(reverse(ans));
+    System.out.println(sqrt(100));
+    System.out.println(fibIter(0, 1, 0));
+    System.out.println(fibIter(1, 1, 0));
+    System.out.println(fibIter(2, 1, 0));
+    System.out.println(fibIter(3, 1, 0));
+    System.out.println(countNoDoubleLetterWords(3,"")); */
   }
   /*Print all words that are made of the letters a-e inclusive.
   *@param length : the length of the words that are to be printed
@@ -25,7 +25,7 @@ public class Recursion {
   */
   public static void printAllWords(int length,String word){
     if (length > 0) {
-      for (char c = 'a'; c <= 'c'; c++) {
+      for (char c = 'a'; c <= 'z'; c++) {
         printAllWords(length-1,word+c);
       }
     } else {
