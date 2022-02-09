@@ -1,16 +1,17 @@
 public class Recursion {
   public static void main(String[] args) {
     /*printAllWords(3);
-    char[] list = {'a','b','c'};
+    char[] list = {};
     printNoDoubleLetterWords(3,list);
-    String ans = "abcd";
+    String ans = "";
     System.out.println(reverse(ans));
     System.out.println(sqrt(100));
+    System.out.println(sqrt(4));
     System.out.println(fibIter(0, 1, 0));
     System.out.println(fibIter(1, 1, 0));
     System.out.println(fibIter(2, 1, 0));
     System.out.println(fibIter(3, 1, 0));
-    System.out.println(countNoDoubleLetterWords(3,"")); */
+    System.out.println(countNoDoubleLetterWords(3,""));*/
   }
   /*Print all words that are made of the letters a-e inclusive.
   *@param length : the length of the words that are to be printed
@@ -90,10 +91,11 @@ public class Recursion {
   }
 
   public static double sqrt(double n, double guess){
-    if ( 0.001 > Math.abs((guess*guess) - n / n * 100)) {
-      return guess;
+    if ( 0.001 <= Math.abs((guess*guess - n) * 100)) {
+      guess = (n/guess + guess) / 2;
+      return sqrt(n,guess);
     } else {
-      return sqrt((n),(( n / guess + guess) / 2));
+      return guess;
     }
   }
 
