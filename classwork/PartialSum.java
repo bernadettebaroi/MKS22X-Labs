@@ -21,12 +21,10 @@ public class PartialSum {
       return true;
     } else if(start >= nums.length) {
       return false;
+    } else if (nums[start] == 6){
+      return (groupSum6(start+1, nums, target-nums[start]));
     } else {
-      if (nums[start] == 6) {
-        return (groupSum6(start+1,nums,target) || groupSum6(start+1, nums, target-nums[start]));
-      } else {
-        return (groupSum6(start+1,nums,target) || groupSum6(start+1, nums, target-nums[start]));
-      }
+      return (groupSum6(start+1,nums,target) || groupSum6(start+1, nums, target-nums[start]));
     }
   }
 
