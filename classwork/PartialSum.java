@@ -16,7 +16,7 @@ public class PartialSum {
     }
   }
 
-  public boolean groupSum6(int start, int[] nums, int target) {
+  public static boolean groupSum6(int start, int[] nums, int target) {
     if (start >= nums.length) {
       if ( target == 0) {
         return true;
@@ -30,5 +30,22 @@ public class PartialSum {
     }
   }
 
+  public static boolean groupSum5(int start, int[] nums, int target) {
+    if (start >= nums.length) {
+      if ( target == 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (nums[start] % 5 == 0){
+      if (start < nums.length && nums[start+1] != 1) {
+        return (groupSum5(start+1, nums, target-nums[start]));
+      } else {
+        return (groupSum5(start+1, nums, target));
+      }
+    } else {
+      return (groupSum5(start+1,nums,target) || groupSum5(start+1, nums, target-nums[start]));
+    }
+  }
 
 }
