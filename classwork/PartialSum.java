@@ -109,8 +109,10 @@ public class PartialSum {
     } else {
       if (nums[start] % 5 != 0 && nums[start] % 3 == 0) {
         return (helperSplit53(start+1, group1+nums[start], group2, nums));
-      } else {
+      } else if (nums[start] % 5 == 0) {
         return (helperSplit53(start+1, group1, group2+nums[start], nums));
+      } else {
+        return (helperSplit53(start+1, group1+nums[start], group2, nums) || helperSplit53(start+1, group1, group2+nums[start], nums));
       }
     }
   }
