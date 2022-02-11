@@ -80,6 +80,25 @@ public class PartialSum {
   }
 
 
+  public boolean groupSumClump(int start, int[] nums, int target) {
+    if (start > nums.length -1) {
+      if (target == 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      int sum = 0;
+      for (int i = 0; i < nums.length; i++) {
+        if (nums[start] == nums[i]) {
+          sum += nums[i];
+        }
+      }
+      return (groupSumClump(start+1,nums,target-sum) || groupSumClump(start+1,nums,target));
+    }
+  }
+
+
   public boolean splitOdd10(int[] nums) {
     return (helperSplitOdd10(0,0,0, nums));
   }
