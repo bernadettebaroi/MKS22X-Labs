@@ -66,7 +66,7 @@ public class PartialSum {
     }
   }
 
-  
+
   public boolean groupNoAdj(int start, int[] nums, int target) {
     if (start > nums.length-1) {
       if (target == 0) {
@@ -76,6 +76,22 @@ public class PartialSum {
       }
     } else {
       return (groupNoAdj(start+2, nums, target-nums[start]) || groupNoAdj(start+1, nums, target));
+    }
+  }
+
+
+  public boolean splitOdd10(int[] nums) {
+    return (helperSplitOdd10(0,0,0, nums));
+  }
+  public boolean helperSplitOdd10(int start, int group1, int group2, int[] nums) {
+    if (start > nums.length -1) {
+      if (group1 % 10 == 0 && group2 % 2 == 1) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return (helperSplitOdd10(start+1, group1+nums[start], group2, nums) || helperSplitOdd10(start+1, group1, group2 + nums[start], nums));
     }
   }
 
