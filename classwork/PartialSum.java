@@ -95,4 +95,24 @@ public class PartialSum {
     }
   }
 
+
+  public boolean split53(int[] nums) {
+    return helperSplit53(0,0,0,nums);
+  }
+  public boolean helperSplit53(int start, int group1, int group2, int[] nums) {
+    if (start > nums.length -1) {
+      if (group1 == group2) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      if (nums[start] % 5 != 0 && nums[start] % 3 == 0) {
+        return (helperSplit53(start+1, group1+nums[start], group2, nums));
+      } else {
+        return (helperSplit53(start+1, group1, group2+nums[start], nums));
+      }
+    }
+  }
+
 }
