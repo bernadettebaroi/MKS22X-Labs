@@ -15,7 +15,7 @@ public class PartialSum {
       return (groupSum(start+1,nums,target) || groupSum(start+1, nums, target-nums[start]));
     }
   }
-  
+
 
   public static boolean groupSum6(int start, int[] nums, int target) {
     if (start >= nums.length) {
@@ -63,6 +63,19 @@ public class PartialSum {
       }
     } else {
       return (splitArrayHelper(start+1, group1+nums[start], group2, nums) || splitArrayHelper(start+1, group1, group2+nums[start], nums) );
+    }
+  }
+
+  
+  public boolean groupNoAdj(int start, int[] nums, int target) {
+    if (start > nums.length-1) {
+      if (target == 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return (groupNoAdj(start+2, nums, target-nums[start]) || groupNoAdj(start+1, nums, target));
     }
   }
 
