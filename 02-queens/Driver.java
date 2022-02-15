@@ -1,11 +1,9 @@
 public class Driver {
   public static void main(String[] args) {
-    QueenBoard test = new QueenBoard(5);
-    if (test.addQueen(0,0)) {
-      System.out.println("true");
-    }
-    if (test.addQueen(1,0)) {
-      System.out.println("false");
-    }
+    QueenBoard test = new QueenBoard(10);
+    System.out.println(test.addQueen(5,5));
+    System.out.println(test.toString());
+    //System.out.println(test.addQueen(5,5));
+    //System.out.println(test.toString());
   }
 }

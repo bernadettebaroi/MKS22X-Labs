@@ -4,6 +4,11 @@ public class QueenBoard {
   /** initialize a square 2d array of the specified size. All values should be 0 */
   public QueenBoard(int size){
     board = new int [size][size];
+    for (int i = 0; i < size; i++) {
+      for (int j = 0; j < size; j++) {
+        board[i][j] = 0;
+      }
+    }
   }
 
   /**
@@ -24,7 +29,8 @@ public class QueenBoard {
         if (board[i][j] == -1) {
           ans += "Q ";
         } else {
-          ans += "_ ";
+          //ans += "_"
+          ans += board[i][j] + " ";
         }
       }
       ans += "\n";
@@ -38,18 +44,22 @@ public class QueenBoard {
   *@postcondition the board is only changed when the function returns true
   * in which case the queen is added and all it's threatened positions are incremented
   */
-  private boolean addQueen(int r, int c){
-    if (board[r][c] > -1) {
+  public boolean addQueen(int r, int c){
+    if (board[r][c] > 0) {
       return false;
     } else {
       board[r][c] = -1;
-      for (int a = r; a < board.length; a++) {
-        board[a][c] += 1;
+      for (int x = 1; x < board.length; x++) {
+          if (x < word.length) {
+            board[r][c] += 1;
+          }
+          if (r+x < word.length && c+x < word[r+x].length) {
+            board[r+x][c+x] += 1;
+          }
+          if (r+x >= 0 && c-x >= 0) {
+            board[r+x][c-x] += 1;
+          }
       }
-      for (int b = c; b < board.length; b++) {
-        board[r][b] += 1;
-      }
-
       return true;
     }
   }
@@ -61,6 +71,11 @@ public class QueenBoard {
   */
   private void removeQueen(int r, int c){
     board[r][c] += 1;
+    for (int x = c; x < board[r].length; x++) {
+      board[x][c+1] += 1;
+      board[x][c-1] += 1;
+      board[x][c] += 1;
+    }
   }
 
   /**Find the first solution configuration possible for this size board. Start by placing
