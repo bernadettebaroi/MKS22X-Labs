@@ -50,13 +50,13 @@ public class QueenBoard {
     } else {
       board[r][c] = -1;
       for (int x = 1; x < board.length; x++) {
-          if (x < word.length) {
-            board[r][c] += 1;
+          if (r+x < board.length && x < board.length) {
+            board[r+x][c] += 1;
           }
-          if (r+x < word.length && c+x < word[r+x].length) {
+          if (r+x < board.length && c+x < board[r+x].length) {
             board[r+x][c+x] += 1;
           }
-          if (r+x >= 0 && c-x >= 0) {
+          if (r+x < board.length && c-x >= 0) {
             board[r+x][c-x] += 1;
           }
       }
@@ -69,12 +69,18 @@ public class QueenBoard {
   *@postcondition the board is modified to remove that queen and all it's
   *threatened positions are decremented
   */
-  private void removeQueen(int r, int c){
+  public void removeQueen(int r, int c){
     board[r][c] += 1;
-    for (int x = c; x < board[r].length; x++) {
-      board[x][c+1] += 1;
-      board[x][c-1] += 1;
-      board[x][c] += 1;
+    for (int x = 1; x < board.length; x++) {
+      if (r+x < board.length && x < board.length) {
+        board[r+x][c] -= 1;
+      }
+      if (r+x < board.length && c+x < board[r+x].length) {
+        board[r+x][c+x] -= 1;
+      }
+      if (r+x < board.length && c-x >= 0) {
+        board[r+x][c-x] -= 1;
+      }
     }
   }
 
