@@ -93,9 +93,23 @@ public class QueenBoard {
   *        returns true when the board is solveable, and leaves the board in a solved state
   *@throws IllegalStateException when the board starts with any non-zero value (e.g. you solved a 2nd time.)
   */
-  public boolean solve(){
+  public boolean solve() {
+    return solve(0);
+  }
+  public boolean solve(int x){
+    if (x >= board.length) {
+      return false;
+    } else {
+      for (int i = 0; i < board[x].length; i++) {
+        if (addQueen(x,i)) {
+          x++;
+          return solve(x);
+        } else {
+          removeQueen(x,i);
+        }
+      }
+    }
     return true;
-    //wrapper method
   }
 
   /**Find all possible solutions to this size board.
