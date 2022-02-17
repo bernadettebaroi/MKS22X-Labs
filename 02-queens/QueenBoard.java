@@ -45,11 +45,8 @@ public class QueenBoard {
   * in which case the queen is added and all it's threatened positions are incremented
   */
   public boolean addQueen(int r, int c){
-    if (board[r][c] > 0) {
-      return false;
-    } else {
-      board[r][c] = -1;
-      for (int x = 1; x < board.length; x++) {
+    if (board[r][c] == 0) {
+      for (int x = 0; x < board.length; x++) {
           if (r+x < board.length && x < board.length) {
             board[r+x][c] += 1;
           }
@@ -59,8 +56,11 @@ public class QueenBoard {
           if (r+x < board.length && c-x >= 0) {
             board[r+x][c-x] += 1;
           }
+          board[r][c] = -1;
       }
       return true;
+    } else {
+      return false;
     }
   }
 
@@ -70,17 +70,17 @@ public class QueenBoard {
   *threatened positions are decremented
   */
   public void removeQueen(int r, int c){
-    board[r][c] += 1;
-    for (int x = 1; x < board.length; x++) {
-      if (r+x < board.length && x < board.length) {
+    for (int x = 0; x < board.length; x++) {
+      if (r+x < board.length) {
         board[r+x][c] -= 1;
       }
-      if (r+x < board.length && c+x < board[r+x].length) {
+      if (r+x < board.length && c+x < board.length ) {
         board[r+x][c+x] -= 1;
       }
       if (r+x < board.length && c-x >= 0) {
         board[r+x][c-x] -= 1;
       }
+      board[r][c] += 1;
     }
   }
 
@@ -96,20 +96,21 @@ public class QueenBoard {
   public boolean solve() {
     return solve(0);
   }
+
   public boolean solve(int x){
     if (x >= board.length) {
-      return false;
+      return true;
     } else {
-      for (int i = 0; i < board[x].length; i++) {
+      for (int i = 0; i < board.length; i++) {
         if (addQueen(x,i)) {
-          x++;
-          return solve(x);
-        } else {
+          if(solve(x+1)) {
+            return true;
+          }
           removeQueen(x,i);
         }
       }
+      return false;
     }
-    return true;
   }
 
   /**Find all possible solutions to this size board.
@@ -117,9 +118,14 @@ public class QueenBoard {
   *@throws IllegalStateException when the board starts with any non-zero value (e.g. you ran solve() before this method)
   */
   public int countSolutions(){
-    return 0;
-    //wrapper method
+    return countSolutions(0);
   }
+
+  public int countSolutions(int x){
+    
+  }
+
+
 
 
 
