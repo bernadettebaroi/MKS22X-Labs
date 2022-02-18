@@ -80,7 +80,7 @@ public class QueenBoard {
       if (r+x < board.length && c-x >= 0) {
         board[r+x][c-x] -= 1;
       }
-      board[r][c] += 1;
+      board[r][c] = 0;
     }
   }
 
@@ -94,6 +94,13 @@ public class QueenBoard {
   *@throws IllegalStateException when the board starts with any non-zero value (e.g. you solved a 2nd time.)
   */
   public boolean solve() {
+    for (int i = 0; i < board.length; i++) {
+      for (int j = 0; j < board.length; j++) {
+        if (board[i][j] != 0) {
+          throw new IllegalArgumentException ("Error Message: the board starts with non-zero value");
+        }
+      }
+    }
     return solve(0);
   }
 
@@ -118,11 +125,29 @@ public class QueenBoard {
   *@throws IllegalStateException when the board starts with any non-zero value (e.g. you ran solve() before this method)
   */
   public int countSolutions(){
+    for (int i = 0; i < board.length; i++) {
+      for (int j = 0; j < board.length; j++) {
+        if (board[i][j] != 0) {
+          throw new IllegalArgumentException ("Error Message: the board starts with non-zero value");
+        }
+      }
+    }
     return countSolutions(0);
   }
 
-  public int countSolutions(int x){
-    
+  public int countSolutions(int start){
+    if (start == board.length) {
+      return 1;
+    } else {
+      int c = 0;
+      for (int j = 0; j < board.length;j++) {
+        if(addQueen(start,j)) {
+          c+= countSolutions(start+1);
+          removeQueen(start,j);
+        }
+      }
+      return c;
+    }
   }
 
 
