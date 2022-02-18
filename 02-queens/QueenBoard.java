@@ -1,6 +1,27 @@
 public class QueenBoard {
   private int[][]board;
 
+  //solve will print the animation when this is true, print nothing otherwise. The default value is false.
+  private boolean animated;
+
+  //the wait time in your animation, defaults to 1000.
+  private int delay;
+
+  //set the animated variable to the specified value
+  public void setAnimate(boolean newValue) {
+    animated = newValue;
+  }
+
+  //set the delay variable to the specified value, any value < 0 should set the value to 0
+  public void setDelay(int newValue) {
+    if (newValue < 0) {
+      delay = 0;
+    } else {
+      delay = newValue;
+    }
+  }
+
+
   /** initialize a square 2d array of the specified size. All values should be 0 */
   public QueenBoard(int size){
     board = new int [size][size];
@@ -58,6 +79,11 @@ public class QueenBoard {
           }
           board[r][c] = -1;
       }
+      if(animated){
+        System.out.println(Text.go(1,1));
+        System.out.println(this);//can modify here
+        Text.wait(delay);
+      }
       return true;
     } else {
       return false;
@@ -81,6 +107,11 @@ public class QueenBoard {
         board[r+x][c-x] -= 1;
       }
       board[r][c] = 0;
+    }
+    if(animated){
+      System.out.println(Text.go(1,1));
+      System.out.println(this);//can modify here
+      Text.wait(delay);
     }
   }
 
