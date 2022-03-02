@@ -23,9 +23,21 @@ public class Maze {
   public Maze(String filename) throws FileNotFoundException{
     File text = new File(filename);
     Scanner input = new Scanner(text);
+    int k = 0;
+    ArrayList<String> samp = new ArrayList<String>();
     while (input.hasNextLine()) {
-      System.out.println(input.nextLine());
+      samp.add(k, input.nextLine());
+      k++;
     }
+    int row = samp.size();
+    int col = samp.get(0).length();
+    maze = new char[row][col];
+    for (int i = 0; i < row;i++) {
+      for (int j = 0; j < col;j++) {
+        maze[i][j] = samp.get(i).charAt(j);
+      }
+    }
+    this.animate = false;
   }
 
   private void wait(int millis){
@@ -54,7 +66,14 @@ public class Maze {
   It should look like the text file with some characters replaced.
   */
   public String toString(){
-    return "WRITE THIS METHOD";
+    String ans = "";
+    for (int i = 0; i < maze.length;i++) {
+      for (int j = 0; j < maze[i].length;j++) {
+        ans += maze[i][j];
+      }
+      ans += "\n";
+    }
+    return ans;
   }
 
   /*Wrapper Solve Function returns the helper function
@@ -65,6 +84,14 @@ public class Maze {
     //only clear the terminal if you are running animation
     if(animate){
       clearTerminal();
+    }
+    for (int i = 0; i < maze.length;i++) {
+      for (int j = 0; j < maze[i].length;j++) {
+        if (maze[i][j] == 'S' ) {
+          startRow = i;
+          startCol = j;
+        }
+      }
     }
     //start solving at the location of the s.
     return solve(startRow,startCol);
@@ -96,7 +123,7 @@ public class Maze {
     //COMPLETE SOLVE
     return -1; //so it compiles
   }
-}
+
 
 
 
