@@ -117,11 +117,33 @@ public class Maze {
     if(animate){
       gotoTop();
       System.out.println(this);
-      wait(50);
+      wait(500);
     }
-
     //COMPLETE SOLVE
-    return -1; //so it compiles
+    if (maze[row][col] == '#') {
+      maze[row][col] = '.';
+    } else if (maze[row][col] == ' ' || maze[row][col] == 'S' ) {
+      maze[row][col] = '@';
+      int x = 1;
+      while (x < maze.length) {
+        if (row + x < maze.length && maze[row+x][col] == ' ') {
+          return solve(row+x,col);
+        } else if (row - x >= 0 && maze[row-x][col] == ' ') {
+          return solve(row-x,col);
+        } else if (col + x < maze[0].length && maze[row][col+x] == ' ') {
+          return solve(row,col+x);
+        } else if (col - x >= 0 && maze[row][col-x] == ' ') {
+          return solve(row,col-x);
+        } else {
+          maze[row][col] = '.';
+        }
+      }
+    } else if (maze[row][col] == 'E') {
+      return 1;
+    } else {
+      return -1; //so it compiles
+    }
+    return 999;
   }
 
 
