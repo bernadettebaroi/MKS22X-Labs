@@ -117,29 +117,33 @@ public class Maze {
     if(animate){
       gotoTop();
       System.out.println(this);
-      wait(500);
+      wait(300);
     }
     //COMPLETE SOLVE
-    if (maze[row][col] == '#') {
-      maze[row][col] = '.';
-    } else if (maze[row][col] == ' ' || maze[row][col] == 'S' ) {
+    if (maze[row][col] == ' ' || maze[row][col] == 'S') {
       maze[row][col] = '@';
-      int x = 1;
-      while (x < maze.length) {
-        if (row + x < maze.length && maze[row+x][col] == ' ') {
-          return solve(row+x,col);
-        } else if (row - x >= 0 && maze[row-x][col] == ' ') {
-          return solve(row-x,col);
-        } else if (col + x < maze[0].length && maze[row][col+x] == ' ') {
-          return solve(row,col+x);
-        } else if (col - x >= 0 && maze[row][col-x] == ' ') {
-          return solve(row,col-x);
-        } else {
-          maze[row][col] = '.';
+      int x =1;
+        if (row + x < maze.length) {
+          if (maze[row+x][col] == ' ') {
+            return solve(row+x,col);
+          }
+        }else if (row - x >= 0) {
+          if (maze[row-x][col] == ' ') {
+            return solve(row-x,col);
+          }
+        } else if (col + x < maze[0].length) {
+          if (maze[row][col+x] == ' ') {
+            return solve(row,col+x);
+          }
+        } else if (col - x >= 0) {
+          if (maze[row][col-x] == ' ') {
+            return solve(row,col-x);
+          }
         }
-      }
     } else if (maze[row][col] == 'E') {
       return 1;
+    } else if (maze[row][col] == '#') {
+      maze[row][col] = '.';
     } else {
       return -1; //so it compiles
     }
