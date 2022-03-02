@@ -24,8 +24,13 @@ public class Maze {
     try {
       File text = new File(filename);
       Scanner input = new Scanner(text);
+      ArrayList<String> samp = new ArrayList<String>();
+      int i = 0;
       while (input.hasNextLine()) {
-        System.out.println(input.nextLine());
+        samp.add(i, input.nextLine())
+      }
+      for (int i = 0; i < samp.size;i++) {
+        System.out.println(samp.get(i) + "\n");
       }
     } catch (FileNotFoundException e) {
       System.out.println("Error: File not Found");
