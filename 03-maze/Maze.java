@@ -26,7 +26,11 @@ public class Maze {
     int k = 0;
     ArrayList<String> samp = new ArrayList<String>();
     while (input.hasNextLine()) {
-      samp.add(k, input.nextLine());
+      String h = input.nextLine();
+      if (h == "") {
+        break;
+      }
+      samp.add(k, h);
       k++;
     }
     int row = samp.size();
