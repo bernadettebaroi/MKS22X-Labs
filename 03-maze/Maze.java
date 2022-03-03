@@ -114,40 +114,42 @@ public class Maze {
   */
   private int solve(int row, int col){ //you can add more parameters since this is private
     //automatic animation! You are welcome.
-    if(animate){
-      gotoTop();
-      System.out.println(this);
-      wait(300);
-    }
     //COMPLETE SOLVE
-    if (maze[row][col] == ' ' || maze[row][col] == 'S') {
-      maze[row][col] = '@';
-      int x =1;
-        if (row + x < maze.length) {
-          if (maze[row+x][col] == ' ') {
-            return solve(row+x,col);
-          }
-        }else if (row - x >= 0) {
-          if (maze[row-x][col] == ' ') {
-            return solve(row-x,col);
-          }
-        } else if (col + x < maze[0].length) {
-          if (maze[row][col+x] == ' ') {
-            return solve(row,col+x);
-          }
-        } else if (col - x >= 0) {
-          if (maze[row][col-x] == ' ') {
-            return solve(row,col-x);
-          }
-        }
+    if (maze[row][col] == '#' || maze[row][col] == '@' || maze[row][col] == '.') {
+      return -1;
     } else if (maze[row][col] == 'E') {
-      return 1;
-    } else if (maze[row][col] == '#') {
-      maze[row][col] = '.';
+      return 0;
     } else {
-      return -1; //so it compiles
+      maze[row][col] = '@';
+      if(animate){
+        gotoTop();
+        System.out.println(this);
+        wait(50);
+      }
+      int s = solve(row+1,col);
+      if (s > -1) {
+        return s +1;
+      }
+      int n = solve(row-1,col);
+      if (n > -1) {
+        return n+1;
+      }
+      int e = solve(row,col+1);
+      if (e > -1) {
+        return e +1;
+      }
+      int w = solve(row,col-1);
+      if (w > -1) {
+        return w +1;
+      }
+      maze[row][col] = '.';
+      if(animate){
+        gotoTop();
+        System.out.println(this);
+        wait(50);
+      }
+      return -1;
     }
-    return 999;
   }
 
 
