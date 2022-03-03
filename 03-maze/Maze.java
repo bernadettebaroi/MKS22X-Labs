@@ -37,7 +37,7 @@ public class Maze {
         maze[i][j] = samp.get(i).charAt(j);
       }
     }
-    this.animate = false;
+    animate = false;
   }
 
   private void wait(int millis){
