@@ -14,64 +14,38 @@ public class MazeGenerator {
       }
       System.out.print("\n");
     }
-
   }
 
-  public static int randomizer(char[][]maze, int row,int col) {
-    if (!emptySpace(maze,row,col)) {
-      return -1;
-    } else {
-      int random = (int)(Math.random() * 4 + 1);
-      if (random == 0 ) {
-        maze[row][col] = ' ';
-        if (randomizer(maze, row+1,col) == -1) {
-          randomizer(maze, row-1,col);
-        }
-        randomizer(maze, row+1,col);
-        return 0;
-      } else if (random == 1) {
-        maze[row][col] = ' ';
-        if (randomizer(maze, row-1,col) == -1) {
-          randomizer(maze, row+1,col);
-        }
-        randomizer(maze,row-1,col);
-        return 0;
-      } else if (random == 2) {
-        maze[row][col] = ' ';
-        if (randomizer(maze, row, col+1) == -1) {
-          randomizer(maze, row,col-1);
-        }
-        randomizer(maze, row, col+1);
-      } else {
-        maze[row][col] = ' ';
-        if (randomizer(maze, row, col-1) == -1) {
-          randomizer(maze, row,col+1);
-        }
-        randomizer(maze, row,col-1);
-        return 0;
-      }
+  public static void randomizer(char[][]maze, int row,int col) {
+    if (!space(maze,row,col)) {
+      maze[row][col] = ' ';
+      randomizer(maze,row+1,col);
+      randomizer(maze,row-1,col);
+      randomizer(maze,row,col+1);
+      randomizer(maze,row,col-1);
+      maze[row][col] = 'E';
     }
-    return 0;
   }
 
-  public static boolean emptySpace(char[][]maze, int row, int col) {
+  public static boolean space(char[][]maze, int row, int col) {
     int ans = 0;
-    if (row +1 < maze.length-1 && maze[row+1][col] == ' ') {
+    if (row +1 == maze.length || maze[row+1][col] == ' ') {
       ans += 1;
     }
-    if (row -1 > 0 && maze[row-1][col] == ' ') {
+    if (row -1 == 0 || maze[row-1][col] == ' ') {
       ans += 1;
     }
-    if (row +1 < maze[0].length-1 && maze[row][col+1] == ' ') {
+    if (col +1 == maze[0].length || maze[row][col+1] == ' ') {
       ans += 1;
     }
-    if (col -1 > 0 && maze[row][col-1] == ' ') {
+    if (col -1 == 0 || maze[row][col-1] == ' ') {
       ans += 1;
     }
     if (ans < 2) {
-      return true;
+      return false;
     }
-    return false;
+    return true;
   }
+
 
 }
