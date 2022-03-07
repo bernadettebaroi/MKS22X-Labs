@@ -9,6 +9,12 @@ import java.io.*;
         char[][]maze = new char[rows][cols];
         //you must fill maze with '#'
         MazeGenerator.generate(maze,startrow,startcol);
+        for (int i = 0; i < maze.length;i++) {
+          for (int j = 0;j < maze[0].length;j++) {
+            System.out.print(maze[i][j]);
+          }
+          System.out.print("\n");
+        }
         //Print the maze here.
         System.out.println("MAZE!");//You need a way to show the maze without the array brackets etc.
       }else if(args.length == 1  || args.length == 2){
