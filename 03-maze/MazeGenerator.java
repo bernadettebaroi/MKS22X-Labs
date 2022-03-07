@@ -36,6 +36,10 @@ public class MazeGenerator {
         if (s > -1) {
           return s +1;
         }
+        int w = randomizer(maze,row,col-1);
+        if (w > -1) {
+          return w +1;
+        }
         int n = randomizer(maze,row-1,col);
         if (n > -1) {
           return n+1;
@@ -44,11 +48,6 @@ public class MazeGenerator {
         if (e > -1) {
           return e +1;
         }
-        int w = randomizer(maze,row,col-1);
-        if (w > -1) {
-          return w +1;
-        }
-        maze[row][col] = ' ';
         return -1;
       }
       return -1;
