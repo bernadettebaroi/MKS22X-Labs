@@ -18,7 +18,6 @@ public class Bronze {
   public static long solve(String filename) throws FileNotFoundException{
     File text = new File(filename);
     Scanner input = new Scanner(text);
-    int k = 0;
     R = input.nextInt();
     C = input.nextInt();
     E = input.nextInt();
@@ -31,25 +30,26 @@ public class Bronze {
       }
       i++;
     }
-    int a = 0;
-    for (int g = 0; g < R; g++) {
-      for (int h = 0; h < C;h++) {
-        System.out.print(board[g][h] + " ");
-      }
-      System.out.print("\n");
-    }
-    System.out.print("\n");
-    while (input.hasNextInt()) {
+    while (input.hasNextLine() && N > 0) {
       R_s = input.nextInt();
       C_s = input.nextInt();
       D_s = input.nextInt();
       cowStomp(R_s,C_s,D_s);
-      a++;
+      N--;
     }
     return 0;
   }
 
-  public static void reading(String filename) throws FileNotFoundException {
+  public static void outpu() {
+    for (int i = 0; i < R; i++) {
+      for (int j = 0; j < C; j++ ) {
+        if (E - board[i][j] < 0) {
+          board[i][j] = 0;
+        } else {
+          board[i][j] = E - board[i][j];
+        }
+      }
+    }
   }
 
   public static void cowStomp(int r, int c, int inch) {
