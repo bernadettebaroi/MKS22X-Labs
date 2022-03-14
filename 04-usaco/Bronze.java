@@ -3,52 +3,80 @@ import java.io.*;
 public class Bronze {
   private static int[][]board;
   private static int R, C, elev_rc, R_s, C_s, D_s, N, E;
+
   public static void main(String[] args) throws FileNotFoundException{
     String name = "makelake.1.in";
     solve(name);
-    System.out.println(elev_rc);
-    System.out.println(N);
-    for (int i = 0; i < 4;i++) {
-      for (int j = 0; j < 6;j++) {
+    for (int i = 0; i < R; i++) {
+      for (int j = 0; j < C;j++) {
         System.out.print(board[i][j] + " ");
       }
       System.out.print("\n");
     }
   }
 
-  public static int setElevRc() {
-    return 0;
-  }
-
   public static long solve(String filename) throws FileNotFoundException{
     File text = new File(filename);
     Scanner input = new Scanner(text);
     int k = 0;
-    int row = input.nextInt();
-    int col = input.nextInt();
-    board = new int[row][col];
-    elev_rc = input.nextInt();
+    R = input.nextInt();
+    C = input.nextInt();
+    E = input.nextInt();
     N = input.nextInt();
+    board = new int[R][C];
     int i = 0;
-    while (input.hasNextLine() && i < row) {
-      for (int j = 0; j < col; j++) {
+    while (input.hasNextLine() && i < R) {
+      for (int j = 0; j < C; j++) {
         board[i][j] = input.nextInt();
       }
       i++;
     }
-    ArrayList<Integer> direc = new ArrayList<Integer>();
     int a = 0;
+    for (int g = 0; g < R; g++) {
+      for (int h = 0; h < C;h++) {
+        System.out.print(board[g][h] + " ");
+      }
+      System.out.print("\n");
+    }
+    System.out.print("\n");
     while (input.hasNextInt()) {
-      int h = input.nextInt();
-      direc.add(a, h);
+      R_s = input.nextInt();
+      C_s = input.nextInt();
+      D_s = input.nextInt();
+      cowStomp(R_s,C_s,D_s);
       a++;
     }
-
-    
     return 0;
   }
 
-  public static int cowStomp() {
-    return 0;
+  public static void reading(String filename) throws FileNotFoundException {
   }
+
+  public static void cowStomp(int r, int c, int inch) {
+    int largest = board[r][c];
+    for (int i = r-1; i < r+2; i++) {
+      for (int j = c-1; j < c+2; j++ ) {
+        if (largest <= board[i][j]) {
+          largest = board[i][j];
+        }
+      }
+    }
+    for (int i = r-1; i < r+2; i++) {
+      for (int j = c-1; j < c+2; j++ ) {
+        if (largest <= board[i][j]) {
+          board[i][j]-=inch;
+          int b = board[i][j];
+          for (int g = r-1; g < r+2; g++) {
+            for (int h = c-1; h < c+2; h++ ) {
+              if (board[g][h] >= b) {
+                board[g][h] = b;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
 }
