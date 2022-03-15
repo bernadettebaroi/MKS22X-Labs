@@ -6,15 +6,32 @@ public class Silver {
   private static int[][]board2;
   private static int N, M, T, R1, C1, R2, C2;
   public static void main(String[] args) throws FileNotFoundException{
-    String name = "ctravel.1.in";
+    String name = "ctravel.2.in";
     solve(name);
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < M;j++) {
+        System.out.print(board[i][j] + " ");
+      }
+      System.out.print("\n");
+    }
+    System.out.print("\n");
     for (int i = 0; i < N; i++) {
       for (int j = 0; j < M;j++) {
         System.out.print(board1[i][j] + " ");
       }
       System.out.print("\n");
     }
+    System.out.print("\n");
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < M;j++) {
+        System.out.print(board2[i][j] + " ");
+      }
+      System.out.print("\n");
+    }
+    System.out.print("\n");
+    System.out.println(board1[R2][C2]);
   }
+
   public static long solve(String filename)throws FileNotFoundException{
     File text = new File(filename);
     Scanner input = new Scanner(text);
@@ -44,52 +61,54 @@ public class Silver {
     C1 = input.nextInt() -1;
     R2 = input.nextInt() -1;
     C2 = input.nextInt() -1;
+    board[R1][C1] = 1;
+    board1[R1][C1] = 1;
     go();
-    return 0;
+    return board[R2][C2];
   }
 
   public static void go() {
-    if (T == 0) {
-    } else {
-      board2[R1][C1] = 1;
-      movements(R1,C1);
-      for (int i = 0; i < N;i++) {
+    if (T != 0) {
+      for (int i = 0; i < N; i++) {
         for (int j = 0; j < M;j++) {
-          if (board1[i][j] >= 1) {
+          if (board1[i][j] > 0) {
             movements(i,j);
           }
         }
-        swap(board);
       }
       T--;
+      copy(board,board1);
+      copy(board,board2);
+      clear();
       go();
     }
   }
 
-  public static void movements(int r, int c, int[][]bor) {
-    if(r+1 < N && board2[r+1][c] != -1) {
-      board2[r+1][c] += 1;
+  public static void movements(int r, int c) {
+    if(r+1 < N && board[r+1][c] != -1) {
+      board[r+1][c] += board[r][c];
     }
-    if (r-1 >= 0 && board2[r-1][c] != -1) {
-      board2[r-1][c] += 1;
+    if (r-1 >= 0 && board[r-1][c] != -1) {
+      board[r-1][c] += board[r][c];
     }
-    if (c+1 < M && board2[r][c+1] != -1) {
-      board2[r][c+1] += 1;
+    if (c+1 < M && board[r][c+1] != -1) {
+      board[r][c+1] += board[r][c];
     }
-    if (c-1 >= 0 && board2[r][c-1] != -1) {
-      board2[r][c-1] += 1;
+    if (c-1 >= 0 && board[r][c-1] != -1) {
+      board[r][c-1] += board[r][c];
     }
+    board[r][c] = 0;
   }
 
   public static void clear() {
     for (int i = 0; i < N;i++) {
       for (int j = 0; j < M;j++) {
-        board1[i][j] = board[i][j];
+        board[i][j] = board2[i][j];
       }
     }
   }
 
-  public static void swap(int[][] orig, int[][] copy) {
+  public static void copy(int[][] orig, int[][] copy) {
     for (int i = 0; i < N;i++) {
       for (int j = 0; j < M;j++) {
         copy[i][j] = orig[i][j];
