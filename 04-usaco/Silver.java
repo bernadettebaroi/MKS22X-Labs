@@ -10,7 +10,7 @@ public class Silver {
     solve(name);
     for (int i = 0; i < N; i++) {
       for (int j = 0; j < M;j++) {
-        System.out.print(board[i][j] + " ");
+        System.out.print(board1[i][j] + " ");
       }
       System.out.print("\n");
     }
@@ -49,51 +49,53 @@ public class Silver {
   }
 
   public static void go() {
-    board[R1][C1] = 1;
-    movements(R1,C1);
-    for (int i = 0; i < N; i++) {
-      for (int j = 0; j < M;j++) {
-        if (board2[i][j] >= 1 && T != 0) {
-          movements(i,j);
+    if (T == 0) {
+    } else {
+      board2[R1][C1] = 1;
+      movements(R1,C1);
+      for (int i = 0; i < N;i++) {
+        for (int j = 0; j < M;j++) {
+          if (board1[i][j] >= 1) {
+            movements(i,j);
+          }
         }
+        swap(board);
       }
+      T--;
+      go();
     }
-    int a = board[R2][C2];
-    int b = board1[R2][C2];
-    int c = board2[R2][C2];
-    System.out.println(a);
-    System.out.println(b);
-    System.out.println(c + "\n");
   }
 
-  public static void movements(int r, int c) {
-    T--;
-    if(r+1 < N && board1[r+1][c] != -1) {
+  public static void movements(int r, int c, int[][]bor) {
+    if(r+1 < N && board2[r+1][c] != -1) {
       board2[r+1][c] += 1;
     }
-    if (r-1 >= 0 && board1[r-1][c] != -1) {
+    if (r-1 >= 0 && board2[r-1][c] != -1) {
       board2[r-1][c] += 1;
     }
-    if (c+1 < M && board1[r][c+1] != -1) {
+    if (c+1 < M && board2[r][c+1] != -1) {
       board2[r][c+1] += 1;
     }
-    if (c-1 >= 0 && board1[r][c-1] != -1) {
+    if (c-1 >= 0 && board2[r][c-1] != -1) {
       board2[r][c-1] += 1;
     }
-    swap();
   }
 
-  public static void swap() {
+  public static void clear() {
     for (int i = 0; i < N;i++) {
       for (int j = 0; j < M;j++) {
-        board1[i][j] = board2[i][j];
-      }
-    }
-    for (int a = 0; a < N;a++) {
-      for (int b = 0; b < M;b++) {
-        board[a][b] = board2[a][b];
+        board1[i][j] = board[i][j];
       }
     }
   }
+
+  public static void swap(int[][] orig, int[][] copy) {
+    for (int i = 0; i < N;i++) {
+      for (int j = 0; j < M;j++) {
+        copy[i][j] = orig[i][j];
+      }
+    }
+  }
+
 
 }
