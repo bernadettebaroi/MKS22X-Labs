@@ -1,12 +1,9 @@
 public class Preliminary {
   public static void main(String[]args){
-    int[] data = {997,998,999,4,3,2,1,0};
-    partition(data,3,7);
 
   }
-  /*Modify the array as per directions above.
-  *@return the index of the final position of the pivot element.
-  */
+
+
   public static int partition ( int [] data, int start, int end){
     int pivotIndex = (int)(Math.random() * (end-start +1) + start);
     int P = data[pivotIndex];
@@ -15,49 +12,42 @@ public class Preliminary {
     int i = 0;
     int j = end-start;
     int tracker = 0;
+    int ans = 0;
     for (int a = start; a <= end; a++) {
       if (a != pivotIndex && i!=j) {
-        if (data[a] < P) {
-          scartch[i] = data[a];
-          i++;
-        } else if (data[a] > P) {
-          scartch[j] = data[a];
-          j--;
-        } else if (data[a] == P) {
-          if (tracker % 2 == 0) {
+        if (data[a] == P) {
+          if (tracker % 2 == 1) {
             scartch[i] = data[a];
             i++;
           } else {
             scartch[j] = data[a];
             j--;
           }
+          tracker++;
+        } else if (data[a] < P) {
+          scartch[i] = data[a];
+          i++;
+        } else if (data[a] > P) {
+          scartch[j] = data[a];
+          j--;
         }
       }
       if (i==j) {
         scartch[i] = P;
+        ans += i;
         break;
       }
     }
-    System.out.println(pivotIndex);
-    for (int e = 0; e < data.length; e++) {
-      System.out.print(data[e] + " ");
-    }
-    System.out.println();
-
+    ans += start;
     for(int f = 0; f < len;f++) {
       data[start] = scartch[f];
       start++;
     }
-    for (int d = 0; d < len; d++) {
-      System.out.print(scartch[d] + " ");
-    }
-    System.out.println();
+    return ans;
+  }
 
-    for (int e = 0; e < data.length; e++) {
-      System.out.print(data[e] + " ");
-    }
-    System.out.println();
 
+  public static int quickselect(int []data, int k){
     return 0;
   }
 
