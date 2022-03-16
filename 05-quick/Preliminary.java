@@ -1,6 +1,12 @@
+import java.util.Arrays;
 public class Preliminary {
   public static void main(String[]args){
-
+    int[] ary = {2, 10, 15, 23, 0, 5};
+    System.out.println(Arrays.toString(ary));
+    System.out.println(quickselect(ary, 2));
+    System.out.println("should be 5");
+    Arrays.sort(ary);
+    System.out.println(Arrays.toString(ary));
   }
 
 
@@ -46,9 +52,25 @@ public class Preliminary {
     return ans;
   }
 
+  public static int quickselect(int[]data, int k) {
+    int len = data.length -1;
+    int a = data.length -1;
+    while (a >= 0) {
+      int re = partition(data, 0, len);
+      if (re > k) {
+        len = len / 2;
+      } else if (re < k) {
+        partition(data, 0, len);
+      } else if (re == k){
+        return data[k];
+      }
+      a--;
+    }
+    return data[k];
+  }
 
-  public static int quickselect(int []data, int k){
-    return 0;
+
+  public static void quicksort(int[]data) {
   }
 
 }
