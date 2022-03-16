@@ -8,12 +8,13 @@ public class Preliminary {
   *@return the index of the final position of the pivot element.
   */
   public static int partition ( int [] data, int start, int end){
-    int pivotIndex = (int)(Math.random() * end);
+    int pivotIndex = (int)(Math.random() * (end-start +1) + start);
     int P = data[pivotIndex];
     int len = end-start+1;
     int[] scartch = new int[len];
     int i = 0;
     int j = end-start;
+    int tracker = 0;
     for (int a = start; a <= end; a++) {
       if (a != pivotIndex && i!=j) {
         if (data[a] < P) {
@@ -22,6 +23,14 @@ public class Preliminary {
         } else if (data[a] > P) {
           scartch[j] = data[a];
           j--;
+        } else if (data[a] == P) {
+          if (tracker % 2 == 0) {
+            scartch[i] = data[a];
+            i++;
+          } else {
+            scartch[j] = data[a];
+            j--;
+          }
         }
       }
       if (i==j) {
