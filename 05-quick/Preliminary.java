@@ -2,7 +2,7 @@ import java.util.Arrays;
 public class Preliminary {
   public static void main(String[]args){
     int[] ary = {2, 10, 15, 23, 0, 5};
-    System.out.println(Arrays.toString(ary));
+    System.out.println("beg" + Arrays.toString(ary));
     System.out.println(quickselect(ary, 2));
     System.out.println("should be 5");
     Arrays.sort(ary);
@@ -12,6 +12,7 @@ public class Preliminary {
 
   public static int partition ( int [] data, int start, int end){
     int pivotIndex = (int)(Math.random() * (end-start +1) + start);
+    System.out.println("pivot " + pivotIndex);
     int P = data[pivotIndex];
     int len = end-start+1;
     int[] scartch = new int[len];
@@ -49,22 +50,38 @@ public class Preliminary {
       data[start] = scartch[f];
       start++;
     }
+    System.out.println("sorted data: " + Arrays.toString(data));
+    System.out.println("ans" + ans);
     return ans;
   }
 
   public static int quickselect(int[]data, int k) {
-    int len = data.length -1;
-    int a = data.length -1;
+    int beg = 0;
+    int end = 0;
+    int a = 0 ;
+    int re = partition(data, 0, data.length -1);
+    if (re == 0 || re < k) {
+      end = data.length -1;
+    } else {
+      end = re;
+    }
     while (a >= 0) {
-      int re = partition(data, 0, len);
-      if (re > k) {
-        len = len / 2;
-      } else if (re < k) {
-        partition(data, 0, len);
-      } else if (re == k){
-        return data[k];
+      if (re == k) {
+        break;
+      } else if (re < k && end != beg) {
+        beg++;
+        int l = end-1;
+        System.out.println("star at " + beg + " end at " + l);
+        beg = partition(data,beg,end);
+        re = beg;
+      } else if (re > k && end != beg) {
+        int m = end -1;
+        System.out.println("star at " + beg + " end at " + m);
+        end--;
+        end = partition(data, beg, end);
+        re = end;
       }
-      a--;
+      a++;
     }
     return data[k];
   }
