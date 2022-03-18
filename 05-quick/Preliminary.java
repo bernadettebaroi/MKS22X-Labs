@@ -4,7 +4,7 @@ public class Preliminary {
     int[] ary = {2, 10, 15, 23, 0, 5};
     System.out.println("startlist " + Arrays.toString(ary));
     quicksort(ary, 0,5);
-    System.out.println("result of quick sort " + Arrays.toString(ary));
+    System.out.println("result " + Arrays.toString(ary));
     Arrays.sort(ary);
     System.out.println("should be " + Arrays.toString(ary));
   }
@@ -50,7 +50,7 @@ public class Preliminary {
       data[start] = scartch[f];
       start++;
     }
-    System.out.println("sort after call " + Arrays.toString(data));
+    System.out.println("partcall " + Arrays.toString(data));
     return ans;
   }
 
@@ -84,15 +84,12 @@ public class Preliminary {
 
   public static void quicksort(int[]data,int lo,int hi){
     int k = partition(data,lo,hi);
-    if (lo == hi || k == 0 || k == data.length -1) {
+    if (lo >= data.length-1 && k+1 <= data.length-1) {
+      quicksort(data,k+1,data.length-1);
       return;
-    } else {
-      if (k > 0 && k < data.length-1) {
-        hi = k -1;
-        quicksort(data,0,hi);
-        lo = k+1;
-        quicksort(data,lo,data.length-1);
-      }
+    }
+    if (hi >= 0 && k-1 >= 0){
+      quicksort(data,0,k-1);
       return;
     }
   }
