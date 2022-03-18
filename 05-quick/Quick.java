@@ -1,5 +1,5 @@
 import java.util.Arrays;
-public class Preliminary {
+public class Quick {
   public static void main(String[]args){
     int[] ary = {2, 10, 15, 23, 0, 5};
     System.out.println("startlist " + Arrays.toString(ary));
@@ -83,14 +83,13 @@ public class Preliminary {
 
 
   public static void quicksort(int[]data,int lo,int hi){
-    int k = partition(data,lo,hi);
-    if (lo >= data.length-1 && k+1 <= data.length-1) {
-      quicksort(data,k+1,data.length-1);
+    if (lo < 0 || hi > data.length-1) {
       return;
     }
-    if (hi >= 0 && k-1 >= 0){
+    int k = partition(data,lo,hi);
+    if (k+1 <= data.length-1 && k -1 >= 0) {
+      quicksort(data,k+1,data.length-1);
       quicksort(data,0,k-1);
-      return;
     }
   }
 
