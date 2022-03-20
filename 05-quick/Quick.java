@@ -1,18 +1,20 @@
 import java.util.Arrays;
 public class Quick {
   public static void main(String[]args){
-    int[] ary = {2, 10, 15, 23, 0, 5};
-    System.out.println("startlist " + Arrays.toString(ary));
-    quicksort(ary, 0,5);
-    System.out.println("result " + Arrays.toString(ary));
-    Arrays.sort(ary);
-    System.out.println("should be " + Arrays.toString(ary));
+    int[] data = new int[1000000];
+    for (int i = 0 ; i < 1000000;i++) {
+      int k = (int)(Math.random() * 100);
+      data[i] = k;
+    }
+    quicksort(data,0,999999);
   }
 
 
   public static int partition ( int [] data, int start, int end){
+    if (start == end) {
+      return start;
+    }
     int pivotIndex = (int)(Math.random() * (end-start +1) + start);
-    System.out.print(pivotIndex + " " + "\n");
     int P = data[pivotIndex];
     int len = end-start+1;
     int[] scartch = new int[len];
@@ -50,7 +52,6 @@ public class Quick {
       data[start] = scartch[f];
       start++;
     }
-    System.out.println("partcall " + Arrays.toString(data));
     return ans;
   }
 
@@ -83,13 +84,14 @@ public class Quick {
 
 
   public static void quicksort(int[]data,int lo,int hi){
-    if (lo < 0 || hi > data.length-1) {
+    if (hi <= lo) {
       return;
-    }
-    int k = partition(data,lo,hi);
-    if (k+1 <= data.length-1 && k -1 >= 0) {
-      quicksort(data,k+1,data.length-1);
-      quicksort(data,0,k-1);
+    } else {
+      int k = partition(data,lo,hi);
+      if (k-1 >= lo || k+1<= hi) {
+        quicksort(data,k+1,hi);
+        quicksort(data,lo,k-1);
+      }
     }
   }
 
