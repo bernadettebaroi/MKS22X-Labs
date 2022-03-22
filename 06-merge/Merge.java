@@ -1,9 +1,8 @@
 import java.util.Arrays;
 public class Merge {
   public static void main(String[]args){
-    int[] left = {1, 2, 3, 4};
-    int[] right = {3, 4, 5, 6, 9};
-    System.out.println(Arrays.toString(merge(left,right)));
+    int[] test = {3, 8, 2, 7, 6, 2, 1, 5, 3, 4};
+    mergesort(test);
 
   }
 
@@ -48,15 +47,34 @@ public class Merge {
   *@return a new array that is the sorted version of data.
   */
   public static int[] mergesortH(int [] data){
-    //********************
-    //COMPLETE THIS METHOD
-    //********************
-    //if more than 1 element{
-      //left = copy half of data
-      //right = copy other half of data
-      //sort each half and merge them together
-    //}
-    return new int[1]; //so this compiles
+    if (data.length > 1) {
+      int half = data.length / 2;
+      int[] left = new int[half];
+      int[] right = new int[data.length-half];
+      for (int i = 0; i < half; i++) {
+        left[i] = data[i];
+      }
+      for (int i = half; i < data.length-half; i++) {
+        right[i] = data[i];
+      }
+      for (int i = 0; i < half -1;i++) {
+        if (left[i] > left[i]) {
+          int swap = left[i];
+          left[i] = left[i+1];
+          left[i+1] = swap;
+        }
+      }
+      for (int i = half; i < data.length-half;i++) {
+        if (right[i] > right[i+1]) {
+          int swap = right[i];
+          right[i] = right[i+1];
+          right[i+1] = swap;
+        }
+      }
+      int[] temp = merge(left,right);
+      System.out.println(Arrays.toString(temp));
+    }
+    return new int[1];
   }
 
 
