@@ -4,6 +4,7 @@ public class Merge {
     int[] test = {3, 8, 2, 7, 6, 2, 1, 5, 3, 4};
     mergesort(test);
 
+
   }
 
 
@@ -54,27 +55,21 @@ public class Merge {
       for (int i = 0; i < half; i++) {
         left[i] = data[i];
       }
-      for (int i = half; i < data.length-half; i++) {
-        right[i] = data[i];
+      for (int i = half; i < data.length; i++) {
+        right[i-half] = data[i];
       }
-      for (int i = 0; i < half -1;i++) {
-        if (left[i] > left[i]) {
-          int swap = left[i];
-          left[i] = left[i+1];
-          left[i+1] = swap;
-        }
+      mergesortH(left);
+      mergesortH(right);
+      data = merge(left,right);
+      System.out.println(Arrays.toString(data));
+      return data;
+    } else {
+      int[] temp = new int[data.length];
+      for (int i = 0; i < data.length; i++) {
+        temp[i] = data[i];
       }
-      for (int i = half; i < data.length-half;i++) {
-        if (right[i] > right[i+1]) {
-          int swap = right[i];
-          right[i] = right[i+1];
-          right[i+1] = swap;
-        }
-      }
-      int[] temp = merge(left,right);
-      System.out.println(Arrays.toString(temp));
+      return temp;
     }
-    return new int[1];
   }
 
 
@@ -88,6 +83,7 @@ public class Merge {
     for(int i = 0; i < data.length; i++){
       data[i] = temp[i];
     }
+    System.out.println(Arrays.toString(data));
   }
 
 
