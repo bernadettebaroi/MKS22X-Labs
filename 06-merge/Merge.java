@@ -1,10 +1,24 @@
 import java.util.Arrays;
 public class Merge {
   public static void main(String[]args){
-    int[] test = {3, 8, 2, 7, 6, 2, 1, 5, 3, 4};
-    mergesort(test);
-
-
+    int[] data = new int[1000000];
+    int[] data1 = new int[1000000];
+    for (int i = 0 ; i < 1000000;i++) {
+      int k = (int)(Math.random() * 1000);
+      data[i] = k;
+      data1[i] = k;
+    }
+    mergesort(data);
+    Arrays.sort(data1);
+    boolean ans = false;
+    for (int i = 0; i < data.length;i++) {
+      if (data[i] == data1[i]) {
+        ans = true;
+      } else {
+        ans = false;
+      }
+    }
+    System.out.println("" + ans);
   }
 
 
@@ -24,7 +38,7 @@ public class Merge {
         if (left[le] < right[ri]) {
           data[i] = left[le];
           le++;
-        } else if (right[ri] > left[le]) {
+        } else if (left[le] > right[ri]) {
           data[i] = right[ri];
           ri++;
         } else if (right[ri] == left[le]) {
@@ -58,16 +72,13 @@ public class Merge {
       for (int i = half; i < data.length; i++) {
         right[i-half] = data[i];
       }
-      mergesortH(left);
-      mergesortH(right);
-      data = merge(left,right);
-      System.out.println(Arrays.toString(data));
-      return data;
+      int [] tempLeft  = mergesortH(left);
+      int [] tempRight  = mergesortH(right);
+      int[] temp = merge(tempLeft,tempRight);
+      return temp;
     } else {
-      int[] temp = new int[data.length];
-      for (int i = 0; i < data.length; i++) {
-        temp[i] = data[i];
-      }
+      int[] temp = new int[1];
+      temp[0] = data[0];
       return temp;
     }
   }
@@ -83,7 +94,6 @@ public class Merge {
     for(int i = 0; i < data.length; i++){
       data[i] = temp[i];
     }
-    System.out.println(Arrays.toString(data));
   }
 
 
