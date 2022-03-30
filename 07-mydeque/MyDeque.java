@@ -16,7 +16,10 @@ public class MyDeque<E>{
     test.addFirst(3);
     test.addFirst(2);
     test.addFirst(1);
+    test.addFirst(0);
+    test.addLast(10);
     System.out.println("toString is: " + test.toString());
+    System.out.println("size is " + test.size());
     System.out.println("getFirst is: " + test.getFirst());
     System.out.println("getLast is: " + test.getLast());
     //System.out.println("to String: " + test.toString());
@@ -41,9 +44,7 @@ public class MyDeque<E>{
       end = 0;
     } else {
       start = (initialCapacity/2);
-      System.out.println("start is " + start);
       end = (initialCapacity/2);
-      System.out.println("end is " + end);
     }
   }
 
@@ -60,7 +61,7 @@ public class MyDeque<E>{
         i = data.length-1;
       }
       if (data[i] != null) {
-        if (j == size -1) {
+        if (j == size) {
           ans += data[i];
           break;
         } else {
@@ -71,8 +72,6 @@ public class MyDeque<E>{
       }
     }
     ans += "]";
-    System.out.println("Start is: " + start);
-    System.out.println("End is: " + end);
     return ans;
   }
 
@@ -85,13 +84,12 @@ public class MyDeque<E>{
     }
     if (data[start] == null) {
       data[start] = element;
-      if (start-1 == -1) {
-        start = data.length-1;
-      } else {
-        start--;
-      }
     }
-    System.out.println(Arrays.toString(data));
+    if (start==0) {
+      start = data.length-1;
+    } else {
+      start--;
+    }
     size++;
   }
 
@@ -99,18 +97,17 @@ public class MyDeque<E>{
     if (element == null) {
       throw new NullPointerException("NullPointerException: Error Message");
     }
-    if (data.length == size) {
+    if (data.length== size) {
       resize();
+    }
+    if (end == data.length-1) {
+      end = 0;
+    } else {
+      end++;
     }
     if (data[end] == null) {
       data[end] = element;
-      if (end+1 == data.length) {
-        end= 0;
-      } else {
-        end++;
-      }
     }
-    System.out.println(Arrays.toString(data));
     size++;
   }
 
@@ -136,11 +133,10 @@ public class MyDeque<E>{
     if (data.length == 0) {
       throw new NoSuchElementException("NoSuchElementException: Error Message");
     }
-    if (data[start] == null) {
-      int temp = start+1;
-      return data[temp];
+    if (start == data.length-1) {
+      return data[0];
     } else {
-      return data[start];
+      return data[start+1];
     }
   }
 
@@ -148,12 +144,7 @@ public class MyDeque<E>{
     if (data.length == 0) {
       throw new NoSuchElementException("NoSuchElementException: Error Message");
     }
-    if (data[end] == null) {
-      int temp = end -1;
-      return data[temp];
-    } else {
-      return data[end];
-    }
+    return data[end];
   }
 
   private void resize() {
@@ -167,9 +158,12 @@ public class MyDeque<E>{
       d[j] = data[i];
       j--;
     }
-    start = j;
     data = d;
+    start = j;
   }
+
+
+
 
 
 
