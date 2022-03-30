@@ -5,28 +5,24 @@ public class MyDeque<E>{
   private int start, end;
 
   public static void main(String[]args){
-    MyDeque<Integer> test =  new MyDeque<Integer>(8);
-    System.out.println("size is " + test.size());
-    test.addFirst(9);
-    test.addFirst(8);
-    test.addLast(7);
-    test.addFirst(6);
-    test.addFirst(5);
-    test.addLast(4);
-    test.addFirst(3);
-    test.addFirst(2);
-    test.addLast(1);
-    test.addFirst(0);
-    test.addFirst(19);
-    test.addFirst(18);
-    test.addLast(17);
-    test.addFirst(16);
-    test.addFirst(15);
-    test.addLast(14);
-    test.addFirst(13);
-    test.addFirst(12);
-    test.addLast(11);
-    test.addFirst(10);
+    MyDeque<Integer> test =  new MyDeque<Integer>();
+    Deque<Integer> real = new LinkedList<Integer>();
+    for (int i = 0; i < 8; i++) {
+      int next = (int)(Math.random()*10);
+      real.addFirst(next);
+      test.addFirst(next);
+      next = (int)(Math.random()*100);
+      real.addLast(next);
+      test.addLast(next);
+    }
+    System.out.println("Re Deque: " + real);
+    System.out.println("My Deque: " + test);
+    System.out.println("T: " + test.getFirst());
+    System.out.println("R: " +real.getFirst());
+    System.out.println("T: " + test.removeFirst());
+    System.out.println("R: " +real.removeFirst());
+    System.out.println("T: " + test.getLast());
+    System.out.println("R: " +real.getLast());
     System.out.println("toString is: " + test.toString());
     System.out.println("size is " + test.size());
     System.out.println("getFirst is: " + test.getFirst());
@@ -157,6 +153,13 @@ public class MyDeque<E>{
   }
 
   public E getFirst(){
+    if (data[end] == null) {
+      throw new NoSuchElementException("NoSuchElementException: Error Message");
+    }
+    return data[end];
+  }
+
+  public E getLast(){
     if (start == data.length-1) {
       if (data[0] == null) {
         throw new NoSuchElementException("NoSuchElementException: Error Message");
@@ -168,13 +171,6 @@ public class MyDeque<E>{
       }
       return data[start+1];
     }
-  }
-
-  public E getLast(){
-    if (data[end] == null) {
-      throw new NoSuchElementException("NoSuchElementException: Error Message");
-    }
-    return data[end];
   }
 
   private void resize() {
