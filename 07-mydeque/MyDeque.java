@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.*;
 public class MyDeque<E>{
   private E[] data;
   private int size;
@@ -6,9 +6,20 @@ public class MyDeque<E>{
 
   public static void main(String[]args){
     MyDeque<Integer> test =  new MyDeque<Integer>(8);
-    System.out.println(test.size());
+    System.out.println("size is " + test.size());
+    test.addFirst(9);
+    test.addFirst(8);
+    test.addFirst(7);
+    test.addFirst(6);
     test.addFirst(5);
-    System.out.println(test.toString());
+    test.addFirst(4);
+    test.addFirst(3);
+    test.addFirst(2);
+    test.addFirst(1);
+    System.out.println("toString is: " + test.toString());
+    System.out.println("getFirst is: " + test.getFirst());
+    System.out.println("getLast is: " + test.getLast());
+    //System.out.println("to String: " + test.toString());
   }
 
   public MyDeque(){
@@ -30,83 +41,134 @@ public class MyDeque<E>{
       end = 0;
     } else {
       start = (initialCapacity/2);
+      System.out.println("start is " + start);
       end = (initialCapacity/2);
+      System.out.println("end is " + end);
     }
   }
 
   public int size(){
-    int empty = 0;
-    int ans = end - start;
-    for (int i = start; i <= end; i ++) {
-      if (data[i] != null) {
-        empty += 1;
-      }
-    }
-    return ans - empty;
+    return size;
   }
 
   public String toString(){
     String ans = "[";
-    int i = start;
-    while (i != end) {
-      if (i < data.length -1 ) {
-        ans += data[i] + ", ";
-        i++;
-      } else if (i == data.length -1 ) {
-        ans += data[i] + ", ";
-        i = 0;
+    int i = end;
+    int j = 1;
+    while (j <= size) {
+      if (i == -1) {
+        i = data.length-1;
+      }
+      if (data[i] != null) {
+        if (j == size -1) {
+          ans += data[i];
+          break;
+        } else {
+          ans += data[i] + ", ";
+          i--;
+          j++;
+        }
       }
     }
-    if (i == end) {
-      ans += data[i];
-    }
     ans += "]";
+    System.out.println("Start is: " + start);
+    System.out.println("End is: " + end);
     return ans;
   }
 
   public void addFirst(E element){
-    if (start < data.length-1) {
-      data[start] = element;
-      start++;
-    } else if (start == data.length -1 && data[0] == null) {
-      data[start] = element;
-      start = 0;
+    if (element == null) {
+      throw new NullPointerException("NullPointerException: Error Message");
     }
+    if (data.length == size) {
+      resize();
+    }
+    if (data[start] == null) {
+      data[start] = element;
+      if (start-1 == -1) {
+        start = data.length-1;
+      } else {
+        start--;
+      }
+    }
+    System.out.println(Arrays.toString(data));
     size++;
   }
 
   public void addLast(E element){
-    if (end < data.length -1) {
-      data[end] = element;
-      end++;
-    } else if (end == data.length -1) {
-      data[end] = element;
-      end = 0;
+    if (element == null) {
+      throw new NullPointerException("NullPointerException: Error Message");
     }
+    if (data.length == size) {
+      resize();
+    }
+    if (data[end] == null) {
+      data[end] = element;
+      if (end+1 == data.length) {
+        end= 0;
+      } else {
+        end++;
+      }
+    }
+    System.out.println(Arrays.toString(data));
     size++;
   }
 
   public E removeFirst(){
-    data[start] = null;
+    if (data.length == 0) {
+      throw new NoSuchElementException("NoSuchElementException: Error Message");
+    }
+    data[start+1] = null;
+    start++;
     return data[start];
   }
 
   public E removeLast(){
-    data[end] = null;
+    if (data.length == 0) {
+      throw new NoSuchElementException("NoSuchElementException: Error Message");
+    }
+    data[end-1] = null;
+    end--;
     return data[end];
   }
 
   public E getFirst(){
-    return data[start];
+    if (data.length == 0) {
+      throw new NoSuchElementException("NoSuchElementException: Error Message");
+    }
+    if (data[start] == null) {
+      int temp = start+1;
+      return data[temp];
+    } else {
+      return data[start];
+    }
   }
 
   public E getLast(){
-    return data[end];
-
+    if (data.length == 0) {
+      throw new NoSuchElementException("NoSuchElementException: Error Message");
+    }
+    if (data[end] == null) {
+      int temp = end -1;
+      return data[temp];
+    } else {
+      return data[end];
+    }
   }
 
   private void resize() {
-    data = Arrays.copyOf(data,(data.length*2) +1);
+    @SuppressWarnings("unchecked")
+    E[] d = (E[])new Object[data.length*2+1];
+    for (int i = 0; i <= start; i++) {
+      d[i] = data[i];
+    }
+    int j = d.length-1;
+    for (int i = data.length-1; i > start;i--) {
+      d[j] = data[i];
+      j--;
+    }
+    start = j;
+    data = d;
   }
 
 
