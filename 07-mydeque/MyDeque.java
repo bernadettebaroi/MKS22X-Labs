@@ -7,10 +7,6 @@ public class MyDeque<E>{
   public static void main(String[]args){
     MyDeque<Integer> test =  new MyDeque<Integer>();
     Deque<Integer> real = new LinkedList<Integer>();
-    System.out.println("toString is: " + test.toString());
-    System.out.println("size is " + test.size());
-    System.out.println("getFirst is: " + test.getFirst());
-    System.out.println("getLast is: " + test.getLast());
     //System.out.println("to String: " + test.toString());
   }
 
