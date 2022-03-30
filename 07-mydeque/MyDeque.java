@@ -7,22 +7,6 @@ public class MyDeque<E>{
   public static void main(String[]args){
     MyDeque<Integer> test =  new MyDeque<Integer>();
     Deque<Integer> real = new LinkedList<Integer>();
-    for (int i = 0; i < 8; i++) {
-      int next = (int)(Math.random()*10);
-      real.addFirst(next);
-      test.addFirst(next);
-      next = (int)(Math.random()*100);
-      real.addLast(next);
-      test.addLast(next);
-    }
-    System.out.println("Re Deque: " + real);
-    System.out.println("My Deque: " + test);
-    System.out.println("T: " + test.getFirst());
-    System.out.println("R: " +real.getFirst());
-    System.out.println("T: " + test.removeFirst());
-    System.out.println("R: " +real.removeFirst());
-    System.out.println("T: " + test.getLast());
-    System.out.println("R: " +real.getLast());
     System.out.println("toString is: " + test.toString());
     System.out.println("size is " + test.size());
     System.out.println("getFirst is: " + test.getFirst());
