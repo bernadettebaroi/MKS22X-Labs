@@ -17,7 +17,6 @@ public class MyDeque<E>{
     test.addFirst(2);
     test.addFirst(1);
     test.addFirst(0);
-    test.addLast(10);
     System.out.println("toString is: " + test.toString());
     System.out.println("size is " + test.size());
     System.out.println("getFirst is: " + test.getFirst());
@@ -35,6 +34,9 @@ public class MyDeque<E>{
   }
 
   public MyDeque(int initialCapacity){
+    if (initialCapacity == 0) {
+      initialCapacity = 2;
+    }
     @SuppressWarnings("unchecked")
     E[] d = (E[])new Object[initialCapacity];
     data = d;
@@ -75,25 +77,8 @@ public class MyDeque<E>{
     return ans;
   }
 
-  public void addFirst(E element){
-    if (element == null) {
-      throw new NullPointerException("NullPointerException: Error Message");
-    }
-    if (data.length == size) {
-      resize();
-    }
-    if (data[start] == null) {
-      data[start] = element;
-    }
-    if (start==0) {
-      start = data.length-1;
-    } else {
-      start--;
-    }
-    size++;
-  }
 
-  public void addLast(E element){
+  public void addFirst(E element){
     if (element == null) {
       throw new NullPointerException("NullPointerException: Error Message");
     }
@@ -111,37 +96,72 @@ public class MyDeque<E>{
     size++;
   }
 
+
+  public void addLast(E element){
+    if (element == null) {
+      throw new NullPointerException("NullPointerException: Error Message");
+    }
+    if (data.length == size) {
+      resize();
+    }
+    if (data[start] == null) {
+      data[start] = element;
+    }
+    if (start==0) {
+      start = data.length-1;
+    } else {
+      start--;
+    }
+    size++;
+  }
+
+
   public E removeFirst(){
     if (data.length == 0) {
       throw new NoSuchElementException("NoSuchElementException: Error Message");
     }
-    data[start+1] = null;
-    start++;
-    return data[start];
+    E ans = data[end];
+    data[end] = null;
+    if (end == 0) {
+      end = data.length-1;
+    } else {
+      end--;
+    }
+    size--;
+    return ans;
   }
 
   public E removeLast(){
     if (data.length == 0) {
       throw new NoSuchElementException("NoSuchElementException: Error Message");
     }
-    data[end-1] = null;
-    end--;
-    return data[end];
+    if (start==data.length-1) {
+      start = 0;
+    } else {
+      start++;
+    }
+    E ans = data[start];
+    data[start] = null;
+    size--;
+    return ans;
   }
 
   public E getFirst(){
-    if (data.length == 0) {
-      throw new NoSuchElementException("NoSuchElementException: Error Message");
-    }
     if (start == data.length-1) {
+      if (data[0] == null) {
+        throw new NoSuchElementException("NoSuchElementException: Error Message");
+      }
       return data[0];
     } else {
+      if (data[start+1] == null) {
+        throw new NoSuchElementException("NoSuchElementException: Error Message");
+      }
       return data[start+1];
     }
   }
 
   public E getLast(){
-    if (data.length == 0) {
+    if (data[end] == null) {
       throw new NoSuchElementException("NoSuchElementException: Error Message");
     }
     return data[end];
