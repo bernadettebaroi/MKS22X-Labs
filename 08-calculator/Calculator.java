@@ -77,5 +77,4 @@ public class Calculator{
     }
     return deque.getFirst();
   }
-
 }
