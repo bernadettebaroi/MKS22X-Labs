@@ -10,6 +10,7 @@ public class Calculator{
   *        Either "too many operands" or "too few operands for operation _" replace _ with +,- etc.
   */
   public static void main(String[]args){
+    /*
     System.out.println("11 3 - 4 + 2.5 *");
     System.out.println(eval("11 3 - 4 + 2.5 *"));
     System.out.println("should be 30.0" + "\n");
@@ -18,44 +19,62 @@ public class Calculator{
     System.out.println("should be 12.0"+ "\n");
     System.out.println("8 2 + 99 9 - * 2 + 9 -");
     System.out.println(eval("8 2 + 99 9 - * 2 + 9 -"));
-    System.out.println("should be 893.0");
+    System.out.println("should be 893.0" + "\n");
+    System.out.println("1 2 3 4 5 + * - -");
+    System.out.println(eval("1 2 3 4 5 + * - -"));
+    System.out.println("should be 26.0" + "\n");
+    System.out.println("25");
+    System.out.println(eval("25"));
+    System.out.println("should be 25.0" + "\n");
+    //eval("");
+    //eval("1 1 1 - * +");
+    //eval("1 1 1 +");
+    */
   }
 
 
   public static double eval(String s){
+    if (s == "") {
+      throw new IllegalArgumentException("too few operands");
+    }
     Scanner input = new Scanner(s);
     Deque<Double> deque = new ArrayDeque<Double>();
-    String temp = "";
     while (input.hasNext()) {
       if (input.hasNextDouble()) {
         deque.addLast(input.nextDouble());
       } else {
         String c = input.next();
         if (deque.size() < 2) {
-          break;
+          throw new IllegalArgumentException("too few operands");
         }
         switch(c) {
           case "+" :
-           System.out.println(deque.addFirst(deque.pollFirst()+deque.pollFirst()));
+           deque.addLast(deque.pollLast()+deque.pollLast());
            break;
           case "-" :
-            double a = deque.pollFirst();
-            double b = deque.pollFirst();
-            System.out.println(deque.addFirst(b-a));
+            double a = deque.pollLast();
+            double b = deque.pollLast();
+            deque.addLast(b-a);
             break;
           case "*":
-            System.out.println(deque.addFirst(deque.pollFirst()*deque.pollFirst()));
+            deque.addLast(deque.pollLast()*deque.pollLast());
             break;
           case "/":
-            double d = deque.pollFirst();
-            double e = deque.pollFirst();
-            System.out.println(deque.addFirst(e/d));
+            double d = deque.pollLast();
+            double e = deque.pollLast();
+            deque.addLast(e/d);
+            break;
+          case "%":
+            double i = deque.pollLast();
+            double j = deque.pollLast();
+            deque.addLast(i%j);
             break;
         }
       }
     }
-    System.out.println(temp);
-    System.out.println(deque);
+    if (deque.size() > 1) {
+      throw new IllegalArgumentException("too many operands");
+    }
     return deque.getFirst();
   }
 
