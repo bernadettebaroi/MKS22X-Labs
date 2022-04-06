@@ -2,7 +2,7 @@ import java.util.*;
 public class BurnTrees{
   private int[][]map;
   private int ticks;
-  private Queue<int[]> frontier;
+  private Queue<Integer> frontier;
   private static final int TREE = 2;
   private static final int FIRE = 1;
   private static final int ASH = 3;
@@ -31,6 +31,24 @@ public class BurnTrees{
     ticks++;//leave this here.
     //YOU MUST IMPLEMENT THE REST OF THIS METHOD
     //(BEFORE WRITING ANY CODE READ ALL OF THE CODE AND SEE HOW IT FITS TOGETHER)
+    while(frontier.size() > 1) {
+      int x = frontier.poll();
+      int y = frontier.poll();
+      if (x-1 >= 0) {
+
+      }
+      if (x+1 <= map.length()) {
+
+      }
+      if (y-1 >= 0) {
+
+      }
+      if (y+1 <= map[x].length()) {
+
+      }
+
+    }
+
   }
 
   /***********************YOU MIGHT UPDATE THIS**************************/
@@ -41,6 +59,7 @@ public class BurnTrees{
    */
   public BurnTrees(int width,int height, double density){
     map = new int[height][width];
+    frontier = new LinkedList<>();
     for(int r=0; r<map.length; r++ ){
       for(int c=0; c<map[r].length; c++ ){
         if(Math.random() < density){
@@ -61,6 +80,8 @@ public class BurnTrees{
     for(int i = 0; i < map.length; i++){
       if(map[i][0]==TREE){
         map[i][0]=FIRE;
+        frontier.add(i);
+        frontier.add(0);
       }
     }
   }
@@ -80,15 +101,20 @@ public class BurnTrees{
       if(args.length > 3){
         DELAY = Integer.parseInt(args[3]);
       }
+
       BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
 
 
       int ans = b.animate(DELAY);//animate all screens
       System.out.println(ans);//print the final answer
 
+
       //int ans = b.outputAll();//print all screens one after another
       //System.out.println(ans);//print the final answer
     }
+
+
+
 
 
 
