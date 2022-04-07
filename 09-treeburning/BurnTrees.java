@@ -31,24 +31,37 @@ public class BurnTrees{
     ticks++;//leave this here.
     //YOU MUST IMPLEMENT THE REST OF THIS METHOD
     //(BEFORE WRITING ANY CODE READ ALL OF THE CODE AND SEE HOW IT FITS TOGETHER)
-    while(frontier.size() > 1) {
-      int x = frontier.poll();
-      int y = frontier.poll();
-      if (x-1 >= 0) {
-
+    int x = frontier.poll();
+    int y = frontier.poll();
+    map[x][y] = ASH;
+    if (x-1 >= 0) {
+      if (map[x-1][y]== TREE) {
+        map[x-1][y] = FIRE;
+        frontier.add(x-1);
+        frontier.add(y);
       }
-      if (x+1 <= map.length()) {
-
-      }
-      if (y-1 >= 0) {
-
-      }
-      if (y+1 <= map[x].length()) {
-
-      }
-
     }
-
+    if (x+1 < map.length) {
+      if (map[x+1][y]== TREE) {
+        map[x+1][y] = FIRE;
+        frontier.add(x+1);
+        frontier.add(y);
+      }
+    }
+    if (y-1 >= 0) {
+      if (map[x][y-1]== TREE) {
+        map[x][y-1] = FIRE;
+        frontier.add(x);
+        frontier.add(y-1);
+      }
+    }
+    if (y+1 < map[x].length) {
+      if (map[x][y+1]== TREE) {
+        map[x][y+1] = FIRE;
+        frontier.add(x);
+        frontier.add(y+1);
+      }
+    }
   }
 
   /***********************YOU MIGHT UPDATE THIS**************************/
@@ -84,6 +97,7 @@ public class BurnTrees{
         frontier.add(0);
       }
     }
+    tick();
   }
 
 
@@ -107,6 +121,7 @@ public class BurnTrees{
 
       int ans = b.animate(DELAY);//animate all screens
       System.out.println(ans);//print the final answer
+
 
 
       //int ans = b.outputAll();//print all screens one after another
