@@ -31,36 +31,33 @@ public class BurnTrees{
     ticks++;//leave this here.
     //YOU MUST IMPLEMENT THE REST OF THIS METHOD
     //(BEFORE WRITING ANY CODE READ ALL OF THE CODE AND SEE HOW IT FITS TOGETHER)
-    int x = frontier.poll();
-    int y = frontier.poll();
-    map[x][y] = ASH;
-    if (x-1 >= 0) {
-      if (map[x-1][y]== TREE) {
-        map[x-1][y] = FIRE;
-        frontier.add(x-1);
-        frontier.add(y);
-      }
-    }
-    if (x+1 < map.length) {
-      if (map[x+1][y]== TREE) {
-        map[x+1][y] = FIRE;
-        frontier.add(x+1);
-        frontier.add(y);
-      }
-    }
-    if (y-1 >= 0) {
-      if (map[x][y-1]== TREE) {
-        map[x][y-1] = FIRE;
-        frontier.add(x);
-        frontier.add(y-1);
-      }
-    }
-    if (y+1 < map[x].length) {
-      if (map[x][y+1]== TREE) {
+    int siz = frontier.size()/2;
+    int a = 0;
+    while (a < siz && frontier.size() > 0) {
+      int x = frontier.poll();
+      int y = frontier.poll();
+      map[x][y] = ASH;
+      if (y+1 < map[x].length && map[x][y+1]== TREE) {
         map[x][y+1] = FIRE;
         frontier.add(x);
         frontier.add(y+1);
       }
+      if (x+1 < map.length && map[x+1][y]== TREE) {
+        map[x+1][y] = FIRE;
+        frontier.add(x+1);
+        frontier.add(y);
+      }
+      if (x-1 >= 0 && map[x-1][y]== TREE) {
+        map[x-1][y] = FIRE;
+        frontier.add(x-1);
+        frontier.add(y);
+      }
+      if (y-1 >= 0 && map[x][y-1]== TREE) {
+        map[x][y-1] = FIRE;
+        frontier.add(x);
+        frontier.add(y-1);
+      }
+      a++;
     }
   }
 
@@ -110,7 +107,7 @@ public class BurnTrees{
       int WIDTH = 20;
       int HEIGHT = 20;
       int DELAY = 200;
-      double DENSITY = .7;
+      double DENSITY = .5;
       if(args.length > 1){
         WIDTH = Integer.parseInt(args[0]);
         HEIGHT = Integer.parseInt(args[1]);
