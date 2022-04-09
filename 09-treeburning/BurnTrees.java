@@ -61,8 +61,19 @@ public class BurnTrees{
     }
   }
 
-  public double averageOfNRuns(double n, double site, double density) {
-    return 0.0;
+  public double averageOfNRuns(double repititions, int size, double density) {
+    double ans = 0.0;
+    double n = repititions;
+    while (n != 0) {
+      BurnTrees b = new BurnTrees(size,size,density);
+      while(!b.done()) {
+        b.tick();
+      }
+      ans += b.getTicks();
+      n--;
+    }
+    System.out.println("average run is " + ans/repititions);
+    return ans/repititions;
   }
 
   /***********************YOU MIGHT UPDATE THIS**************************/
@@ -107,7 +118,7 @@ public class BurnTrees{
       int WIDTH = 20;
       int HEIGHT = 20;
       int DELAY = 200;
-      double DENSITY = .5;
+      double DENSITY = 1;
       if(args.length > 1){
         WIDTH = Integer.parseInt(args[0]);
         HEIGHT = Integer.parseInt(args[1]);
@@ -119,11 +130,11 @@ public class BurnTrees{
 
       BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
 
-
+/*
       int ans = b.animate(DELAY);//animate all screens
       System.out.println(ans);//print the final answer
-
-
+*/
+      double average = b.averageOfNRuns(10,20,1);
 
       //int ans = b.outputAll();//print all screens one after another
       //System.out.println(ans);//print the final answer
