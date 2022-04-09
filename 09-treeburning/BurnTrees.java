@@ -13,7 +13,7 @@ public class BurnTrees{
    *@return false if any fires are still burning, true otherwise
    */
   public boolean done(){
-    if (frontier.size() == 0) {
+    if (frontier.size() < 2) {
       return true;
     }
     //YOU MUST IMPLEMENT THIS METHOD
@@ -62,6 +62,10 @@ public class BurnTrees{
         frontier.add(y+1);
       }
     }
+  }
+
+  public double averageOfNRuns(double n, double site, double density) {
+    return 0.0;
   }
 
   /***********************YOU MIGHT UPDATE THIS**************************/
