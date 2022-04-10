@@ -72,7 +72,6 @@ public class BurnTrees{
       ans += b.getTicks();
       n--;
     }
-    System.out.println("average run is " + ans/repititions);
     return ans/repititions;
   }
 
@@ -118,7 +117,7 @@ public class BurnTrees{
       int WIDTH = 20;
       int HEIGHT = 20;
       int DELAY = 200;
-      double DENSITY = 1;
+      double DENSITY = .05;
       if(args.length > 1){
         WIDTH = Integer.parseInt(args[0]);
         HEIGHT = Integer.parseInt(args[1]);
@@ -128,16 +127,31 @@ public class BurnTrees{
         DELAY = Integer.parseInt(args[3]);
       }
 
-      BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
+      /*
+      double n = DENSITY;
+      while (n <= .96) {
+        if (0.5 < n && n < 0.65) {
+          BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
+          double average = b.averageOfNRuns(100,500,n);
+          System.out.println("density of " + n + " is " + average);
+          n += 0.01;
+        } else {
+          BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
+          double average = b.averageOfNRuns(100,500,n);
+          System.out.println("density of " + n + " is " + average);
+          n += 0.05;
+        }
+      }
+      */
 
-/*
-      int ans = b.animate(DELAY);//animate all screens
-      System.out.println(ans);//print the final answer
-*/
-      double average = b.averageOfNRuns(10,20,1);
+      //BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
+      //int ans = b.animate(DELAY);//animate all screens
+      //System.out.println(ans);//print the final answer
 
       //int ans = b.outputAll();//print all screens one after another
       //System.out.println(ans);//print the final answer
+
+      //double average = b.averageOfNRuns(10,100,.6);
     }
 
 
