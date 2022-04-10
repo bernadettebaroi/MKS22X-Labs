@@ -1,4 +1,5 @@
 import java.util.*;
+import java.math.BigDecimal;
 public class BurnTrees{
   private int[][]map;
   private int ticks;
@@ -114,10 +115,10 @@ public class BurnTrees{
 
 
     public static void main(String[]args){
-      int WIDTH = 20;
-      int HEIGHT = 20;
-      int DELAY = 200;
-      double DENSITY = .05;
+      int WIDTH = 500;
+      int HEIGHT = 500;
+      int DELAY = 150;
+      double DENSITY = 0.0;
       if(args.length > 1){
         WIDTH = Integer.parseInt(args[0]);
         HEIGHT = Integer.parseInt(args[1]);
@@ -127,23 +128,37 @@ public class BurnTrees{
         DELAY = Integer.parseInt(args[3]);
       }
 
-      /*
-      double n = DENSITY;
-      while (n <= .96) {
-        if (0.5 < n && n < 0.65) {
+
+      System.out.println("");
+      System.out.println("Table 1:");
+      System.out.println("");
+      System.out.println("Density            Burn Time");
+      int n = (int)(DENSITY*100);
+      while (n <= 95) {
+        if (n == 0 || n== 5 ) {
           BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
-          double average = b.averageOfNRuns(100,500,n);
-          System.out.println("density of " + n + " is " + average);
-          n += 0.01;
+          double average = b.averageOfNRuns(100,WIDTH,n*0.01);
+          System.out.println(n + "                     " + average);
         } else {
           BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
-          double average = b.averageOfNRuns(100,500,n);
-          System.out.println("density of " + n + " is " + average);
-          n += 0.05;
+          double average = b.averageOfNRuns(100,500,n*0.01);
+          System.out.println(n + "                    " + average);
         }
+        n += 5;
       }
-      */
 
+      System.out.println("");
+      System.out.println("");
+      System.out.println("Table 2:");
+      System.out.println("");
+      System.out.println("Density            Burn Time");
+      int k = 56;
+      while (55 < k && k < 65) {
+        BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
+        double average = b.averageOfNRuns(100,WIDTH,k*0.01);
+        System.out.println(k + "                    " + average);
+        k += 1;
+      }
       //BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
       //int ans = b.animate(DELAY);//animate all screens
       //System.out.println(ans);//print the final answer

@@ -5,7 +5,7 @@
    I chose this board size because there's a vast amount of space for the fire to spread. Using this board size gave me a solid average result.
 2. Why did you choose the number of repetitions size for your finalized table?
 
-   I chose 100 as my repetition because it returned more precise result and it was comparable and observable for behavioral pattern.
+   I chose 100 as my repetition because it returned more precise result and it was comparable and observable for behavioral patterns.
 3. What did your testing show about changing the board size?
 
    Increasing the board size clarified the density of where the maximum burn time is located.
@@ -18,7 +18,7 @@
 
 
 ### Board Size is 500 Repetitions is 100
-#### Density at 5% intervals
+#### Table 1: Density at 5% intervals
 | Density       | Burn Time        |
 | ------------- |:-------------:|
 | 5%            | 1.90      |
@@ -41,7 +41,7 @@
 | 90%           | 537.95    |
 | 95%           | 520.11    |
 
-#### Density at 1% intervals around the maximum
+#### Table 2: Density at 1% intervals around the maximum
 | Density       | Burn Time         |
 | ------------- |:-------------:|
 | 56%           | 181.21      |
