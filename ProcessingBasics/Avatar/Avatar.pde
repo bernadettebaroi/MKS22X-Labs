@@ -2,7 +2,7 @@
   int MODE;
   void setup(){
            size(800,800);
-           MODE = 1;
+           MODE = 3;
            x = width/2;
            y = height/2;
   }
@@ -22,13 +22,18 @@
 
     switch(MODE){
      case 1:
-       x = (int)Math.random() * 10;
-       y = (int)Math.random() * 10;
-       return width/4;
+       value = (int)(Math.random() * width/2);
+       return value ;
      case 2:
-       return 0;
+       int z = (int)(Math.random() * 3)-1 ;
+       value += z;
+       return value;
      case 3:
-       return 0;
+       value += 1; 
+       if (value > width) {
+         value -= width;
+       }
+       return value;
      default:
        return width/2;
     }
@@ -36,6 +41,8 @@
 
 void avatar(int x, int y){
   fill(200);
+  circle(x,y,150);
+  /*
   triangle(x, y, 2*x, 3*y, 3*x, y);
   fill(130);
   circle(x, y, (x+y)/2);
