@@ -1,5 +1,40 @@
+  int x,y;
+  int MODE;
+  void setup(){
+           size(800,800);
+           MODE = 1;
+           x = width/2;
+           y = height/2;
+  }
+  void draw(){
+           background(255);
+           x = change(x);
+           y = change(y);
+           avatar(x,y);
+  }
+  int change(int value){
+    /**
+     mode 1: return a random location on the screen.
+     mode 2: change value by +1, 0, or -1 randomly
+     mode 3: change value by +1 , but if it goes past the end of the screen ,
+           wrap back around to the other end of the screen.
+    */
+
+    switch(MODE){
+     case 1:
+       x = (int)Math.random() * 10;
+       y = (int)Math.random() * 10;
+       return width/4;
+     case 2:
+       return 0;
+     case 3:
+       return 0;
+     default:
+       return width/2;
+    }
+  }
+
 void avatar(int x, int y){
-  //your code here
   fill(200);
   triangle(x, y, 2*x, 3*y, 3*x, y);
   fill(130);
@@ -12,30 +47,15 @@ void avatar(int x, int y){
   circle(1.7*x,1.7*y,(x+y)/5);
   circle(2.25*x,1.7*y,(x+y)/5);
   //nose
-  line(400, 400, 400, 450);
+  //line(400, 400, 400, 450);
   //whiskers
+  /*
   line(200, 410, 325, 450);
   line(200, 460, 325, 450);
   line(210, 520, 325, 450);
   line(475, 450, 600, 370);
   line(475, 450, 600, 450);
   line(475, 450, 600, 490);
+  */
   
-//replace the rectangle with something better
-
-
-}
-int xp,yp;
-void setup(){
-  size(800,800);
-  xp = 200;
-  yp = 200;
-}
-void draw(){
-  background(160, 140, 30);
-  //avatar(xp,yp);
-  //xp++;
-  //yp++;
-  avatar(xp,yp);
-  //avatar(600,300);
 }
