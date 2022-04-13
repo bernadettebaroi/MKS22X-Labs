@@ -2,7 +2,7 @@
   int MODE;
   void setup(){
            size(800,800);
-           MODE = 3;
+           MODE = 2;
            x = width/2;
            y = height/2;
   }
@@ -22,8 +22,8 @@
 
     switch(MODE){
      case 1:
-       value = (int)(Math.random() * width/2);
-       return value ;
+       value = (int)(Math.random() * width);
+       return value;
      case 2:
        int z = (int)(Math.random() * 3)-1 ;
        value += z;
@@ -41,28 +41,23 @@
 
 void avatar(int x, int y){
   fill(200);
-  circle(x,y,150);
-  /*
-  triangle(x, y, 2*x, 3*y, 3*x, y);
+  triangle(x, y, 200+x, y, 100+x, 200+y);
   fill(130);
-  circle(x, y, (x+y)/2);
+  circle(x, y, 100);
   fill(130);
-  circle(3*x, y, (x+y)/2);
+  circle(200+x, y, 100);
   fill(30);
-  triangle(1.75*x, 2.5*y, 2*x, 3*y, 2.25*x, 2.5*y);
+  triangle(75+x, 150+y, 125+x, 150+y, 100+x, 200+y);
   //eyes
-  circle(1.7*x,1.7*y,(x+y)/5);
-  circle(2.25*x,1.7*y,(x+y)/5);
+  circle(70+x,55+y,50);
+  circle(130+x,55+y,50);
   //nose
-  //line(400, 400, 400, 450);
+  line(100+x, 90+y, 100+x, 125+y);
   //whiskers
-  /*
-  line(200, 410, 325, 450);
-  line(200, 460, 325, 450);
-  line(210, 520, 325, 450);
-  line(475, 450, 600, 370);
-  line(475, 450, 600, 450);
-  line(475, 450, 600, 490);
-  */
-  
+  line(25+x, 100+y, 60+x, 120+y);
+  line(25+x, 120+y, 60+x, 120+y);
+  line(25+x, 140+y, 60+x, 120+y);
+  line(137+x, 125+y, 172+x, 145+y);
+  line(137+x, 125+y, 172+x, 125+y);
+  line(137+x, 125+y, 172+x, 105+y);
 }
