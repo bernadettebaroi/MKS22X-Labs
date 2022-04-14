@@ -9,8 +9,8 @@
   int SQUARESIZE;
 
   void setup() {
-    size(600, 500);
-    ROWS = 50;
+    size(600, 600);
+    ROWS = 60;
     COLS = 60;
     /**question 1 *********************************
      *At this point you have initialized width, height,ROWS,COLS. You can change these values
@@ -30,7 +30,7 @@
      replace squareSize = 8; with the correct square size.
      * DO NOT just write a number, it must work when you change the size() command or the ROWS and COLS
      */
-    SQUARESIZE = (width/COLS) * (height/ROWS);//side length
+    SQUARESIZE = (width/COLS);//side length
 
   }
 
@@ -90,23 +90,19 @@
      *2. Decide how to fill them in using the String[] parameter
      *   Colors: Fire = RED, Tree = GREEN, SPACE = WHITE, ASH = GREY
      */
-     int x = 0;
-     int y = 0;
-     for (int i = 0; i < lines.length;i++) {
-       for (int j = 0; j < lines.length;j++) {
+     for (int i = 0; i < ROWS;i++) {
+       for (int j = 0; j < COLS;j++) {
          if (lines[i].charAt(j) == ' ') {
-           fill(200);
+           fill(255,255,255);
          } else if (lines[i].charAt(j) == '@') {
-           fill(0);
+           fill(0,128,0);
          } else if (lines[i].charAt(j) == '.') {
-           fill(150);
+           fill(106,108,109);
          } else {
-           fill(185);
+           fill(255,0,0);
          }
-         rect(x, y, (width/COLS), (height/ROWS));
-         x++;
+         square(j*SQUARESIZE, i*SQUARESIZE, SQUARESIZE);
        }
-       y++;
      }
 
   }
