@@ -4,6 +4,7 @@ void setup() {
   orbList = new ArrayList<Orb>();
 }
 void mouseClicked() {
+  orbList.add(new Orb(mouseX, mouseY, random(-3,3), random(-3,3), random(20,70)));
   //add a new Orb to the orbList, constructed as follows:
   //The x and y positions are the same as the mouse
   //the radius should be between in the range [20.0,70.0)
