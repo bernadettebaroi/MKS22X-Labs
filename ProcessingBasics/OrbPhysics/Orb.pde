@@ -20,7 +20,7 @@ public class Orb{
     //draw a ellipse at the x,y position, with the correct radius.
     //make sure it is the correct color
     fill(c);
-    ellipse(x,y,x+radius, y+radius);
+    ellipse(x,y,radius, radius);
     //make sure you read the parameters of ellipse, so that you have the correct size.
     //radius is NOT one of the parameters of ellipse by default.
   }
@@ -29,20 +29,20 @@ public class Orb{
     //PART 2
     //change the x based on the xSpeed
     //change the y based on the ySpeed
-    x = xSpeed + x;
-    y = ySpeed + y;
-    
     //PART 3
     //Change the speed when you collide with the end of the screen (all 4 sides)
-    if (x == width || x == 0) {
+    if (x >= width || x <= 0) {
       xSpeed *= -1;
     }
-    if (y == height || y == 0) {
+    x = xSpeed+x;
+    if (y >= height || y <= 0) {
       ySpeed *= -1;
     }
+    y = ySpeed+y;
 
     //Part 4
     //Add a small adjustment for gravity. Gravity is a ySpeed acceleration...
+    ySpeed += .3;
     //You don't need a variable for this if every object experiences the same
     //gravitational constant (find the value that looks nice experimentally, 9.8 will not work well).
     
