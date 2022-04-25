@@ -42,9 +42,15 @@ public class Orb{
 
     //Part 4
     //Add a small adjustment for gravity. Gravity is a ySpeed acceleration...
-    ySpeed += .3;
+    //ySpeed += .3;
     //You don't need a variable for this if every object experiences the same
     //gravitational constant (find the value that looks nice experimentally, 9.8 will not work well).
     
+  }
+  
+  void attract(Orb other) {
+    float distance = dist(x,y,other.x,other.y);
+    xSpeed += ((other.x-x)/distance*distance);
+    ySpeed += ((other.y-y)/distance*distance);
   }
 }

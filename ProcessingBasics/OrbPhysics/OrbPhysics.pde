@@ -12,9 +12,12 @@ void mouseClicked() {
 }
 void draw() {
   background(255);
+  Orb test = new Orb(width/2,height/2,0,0,20);
+  test.display();
   for (Orb o : orbList) {
     o.move();
     o.display();
+    test.attract(o);
   }
   fill(0);
   text(frameRate,20,20);
