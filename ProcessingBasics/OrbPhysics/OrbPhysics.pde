@@ -17,7 +17,7 @@ void draw() {
   for (Orb o : orbList) {
     o.move();
     o.display();
-    test.attract(o);
+    o.attract(test);
   }
   fill(0);
   text(frameRate,20,20);

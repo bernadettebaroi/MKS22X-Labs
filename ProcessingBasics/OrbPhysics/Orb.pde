@@ -50,7 +50,7 @@ public class Orb{
   
   void attract(Orb other) {
     float distance = dist(x,y,other.x,other.y);
-    xSpeed += ((other.x-x)/distance*distance);
-    ySpeed += ((other.y-y)/distance*distance);
+    xSpeed += 0.003*((other.x-x)/distance*distance);
+    ySpeed += 0.003*((other.y-y)/distance*distance);
   }
 }
