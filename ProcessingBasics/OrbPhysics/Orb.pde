@@ -21,6 +21,7 @@ public class Orb{
     //make sure it is the correct color
     fill(c);
     ellipse(x,y,radius, radius);
+    line(x,y,x+5*xSpeed,y+5*ySpeed);
     //make sure you read the parameters of ellipse, so that you have the correct size.
     //radius is NOT one of the parameters of ellipse by default.
   }
@@ -31,7 +32,6 @@ public class Orb{
     //change the y based on the ySpeed
     //PART 3
     //Change the speed when you collide with the end of the screen (all 4 sides)
-    line(x,y,5*xSpeed,5*ySpeed);
     if (x >= width || x <= 0) {
       xSpeed *= -1;
     }
@@ -49,9 +49,20 @@ public class Orb{
     
   }
   
-  void attract(Orb other) {float distance = dist(x,y,other.x,other.y);
+  void attract(Orb other) {
+    float distance = dist(x,y,other.x,other.y);
     other.xSpeed += 0.003*((x-other.x)/distance*distance);
     other.ySpeed += 0.003*((y-other.y)/distance*distance);
+  }
+  
+  void attractSpring(Orb other) {
+    float distance = dist(x,y,other.x,other.y);
+    float force = (distance - SPRING_LENGTH) * SPRING_CONSTANT;
+    other.xSpeed += force * ((x-other.x) / distance);
+    other.xSpeed *= SPRING_DAMPEN;
+    
+    other.ySpeed += force * ((y-other.y) / distance);
+    other.ySpeed *= SPRING_DAMPEN;
   }
   
 
