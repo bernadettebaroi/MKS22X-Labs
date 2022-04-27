@@ -1,7 +1,10 @@
 ArrayList<Orb>orbList;
+Orb center;
+int MODE;
 void setup() {
-  size(1000, 700);
+  size(1000, 800);
   orbList = new ArrayList<Orb>();
+  center = new Orb(width/2,height/2,0,0,20);
 }
 void mouseClicked() {
   orbList.add(new Orb(mouseX, mouseY, random(-3,3), random(-3,3), random(20,70)));
@@ -9,15 +12,27 @@ void mouseClicked() {
   //The x and y positions are the same as the mouse
   //the radius should be between in the range [20.0,70.0)
   //the xSpeed and ySpeed should be in the range [-3.0,3.0)
+  orbList.add(new Orb(mouseX, mouseY, 5, 0, 20));
+  
 }
 void draw() {
   background(255);
-  Orb test = new Orb(width/2,height/2,0,0,20);
-  test.display();
+  center.display();
+  MODE = 0;
+  if(keyPressed) {
+    if (key == BACKSPACE || key == DELETE) {
+      orbList.clear();
+    } else if (key == ) {
+      MODE++;
+    }
+  }
   for (Orb o : orbList) {
-    o.move();
     o.display();
-    o.attract(test);
+    if (MOVE % 2 ==1) {
+      o.move();
+    } else if (MOVE %2 ==0) {
+      center.attract(o);
+    } 
   }
   fill(0);
   text(frameRate,20,20);
