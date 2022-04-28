@@ -35,26 +35,41 @@ void draw() {
   }
   center.display();
   for (Orb o : orbList) {
-    if (gravityMODE || MODE == GRAVITY) {
+    if (gravityMODE) {
+      o.gravity();
+    }
+    if (MODE == GRAVITY) {
       o.move();
+      o.bounce();
       o.display();
     } else if (MODE == ORBIT ) {
       o.move();
-      o.display();
       center.attract(o);
+      o.display();
     } else if (MODE == SPRING ) {
       o.move();
-      o.display();
       center.attractSpring(o);
+      o.display();
     } 
   }
   fill(255);
-  rect(0,0,70,70);
+  rect(0,0,110,90);
   fill(0);
   text(frameRate,20,20);
-  text(orbList.size(),20,40);
+  text("# of ORBS: " + orbList.size(),20,40);
   text ("MODE: ", 20,60);
-  text(MODE,60,60);
+  if (MODE == 0) {
+    text("GRAVITY",60,60);
+  } else if (MODE == 1) {
+    text("ORBIT",60,60);
+  } else if (MODE == 2) {
+    text("SPRING",60,60);
+  }
+  if (gravityMODE) {
+    text("Gravity ON", 20,80);
+  } else {
+    text("Gravity OFF", 20,80);
+  }
 }
 
 void keyPressed() {

@@ -20,7 +20,7 @@ public class Orb{
     //draw a ellipse at the x,y position, with the correct radius.
     //make sure it is the correct color
     fill(c);
-    ellipse(x,y,radius, radius);
+    ellipse(x,y,2*radius, 2*radius);
     line(x,y,x+5*xSpeed,y+5*ySpeed);
     //make sure you read the parameters of ellipse, so that you have the correct size.
     //radius is NOT one of the parameters of ellipse by default.
@@ -32,6 +32,17 @@ public class Orb{
     //change the y based on the ySpeed
     //PART 3
     //Change the speed when you collide with the end of the screen (all 4 sides)
+    x += xSpeed;
+    y += ySpeed;
+
+    //Part 4
+    //Add a small adjustment for gravity. Gravity is a ySpeed acceleration...
+    //You don't need a variable for this if every object experiences the same
+    //gravitational constant (find the value that looks nice experimentally, 9.8 will not work well).
+    
+  }
+  
+  void bounce () {
     if (x >= width || x <= 0) {
       xSpeed *= -1;
     }
@@ -39,20 +50,12 @@ public class Orb{
     if (y >= height || y <= 0) {
       ySpeed *= -1;
     }
-    y = ySpeed+y;
-
-    //Part 4
-    //Add a small adjustment for gravity. Gravity is a ySpeed acceleration...
-    ySpeed += .15;
-    //You don't need a variable for this if every object experiences the same
-    //gravitational constant (find the value that looks nice experimentally, 9.8 will not work well).
-    
   }
   
   void attract(Orb other) {
     float distance = dist(x,y,other.x,other.y);
-    other.xSpeed += 0.003*((x-other.x)/distance*distance);
-    other.ySpeed += 0.003*((y-other.y)/distance*distance);
+    other.xSpeed += 20*((x-other.x)/(distance*distance));
+    other.ySpeed += 20*((y-other.y)/(distance*distance));
   }
   
   void attractSpring(Orb other) {
@@ -65,6 +68,13 @@ public class Orb{
     other.ySpeed *= SPRING_DAMPEN;
   }
   
+  void gravity() {
+    ySpeed += 0.15;
+  }
+  
+  void gravityOff() {
+    ySpeed -= 0.15;
+  }
 
   
 }
