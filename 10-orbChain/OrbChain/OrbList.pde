@@ -6,6 +6,7 @@ public class OrbList {
     first = new FixedOrbNode(0, height/5);
     last = new FixedOrbNode(width, height/5);
     //link them to eachother
+    line(0,height/5, width, height/5);
     first.next = last;
     last.prev = first;
   }
@@ -14,6 +15,7 @@ public class OrbList {
   *complete this method
   */
   void add(OrbNode orb){
+    
     //insert orb at the end of the list before the last node.
   }
 
