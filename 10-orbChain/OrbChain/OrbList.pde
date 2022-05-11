@@ -17,8 +17,8 @@ public class OrbList {
     last.prev.next = orb;
     orb.prev = last.prev;
     orb.next = last;
-    last.prev = last.next; 
-    //
+    //last.prev = orb.prev.next;
+    last.prev = orb;
     //insert orb at the end of the list before the last node.
   }
 
@@ -29,8 +29,8 @@ public class OrbList {
   void processAll() {
     OrbNode current = first;
     if (current != null) {
-      first.next = current;
       current.move();
+      current = current.next;
     }
     //advance current to next until it is null, move() each of the nodes
   }
