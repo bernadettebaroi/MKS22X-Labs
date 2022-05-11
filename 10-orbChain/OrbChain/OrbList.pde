@@ -17,6 +17,7 @@ public class OrbList {
     last.prev.next = orb;
     orb.prev = last.prev;
     orb.next = last;
+    last.prev = last.next; 
     //
     //insert orb at the end of the list before the last node.
   }
