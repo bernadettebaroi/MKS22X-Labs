@@ -24,9 +24,11 @@ public class OrbNode {
     ellipse(x, y, radius*2, radius*2);
     //If next or previous exist, draw lines to them! (aim for slightly off center)
     /*you write this part*/
-    if (prev != null && next != null) {
-      line(prev.x -10,prev.y + 10,next.x+10, next.y-10);
-      line(prev.x+10,prev.y-10,next.x-10, next.y+10);
+    if (prev != null) {
+      line(x+10,y-10,prev.x-10, prev.y+10);
+    }
+    if (next != null) {
+      line(x+10,y-10,next.x-10, next.y+10);
     }
   }
 
@@ -46,7 +48,7 @@ public class OrbNode {
     x+=dx;
     y+=dy;
     //apply gravity
-    dy+=0.35;
+    dy+= GRAVITY;
   }
 
   void springAttract(OrbNode other) {
