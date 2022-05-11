@@ -1,9 +1,11 @@
-static int SPRING = 2;
+static int ADD_MODE = 0;
+static int INSERT_MODE = 1;
+static int DELETE_MODE = 2;
 static float SPRING_LENGTH = 50;
 static float SPRING_DAMPEN = 0.990;
 static float SPRING_CONSTANT = 0.015;
 static float GRAVITY = 0.35;
-static int MODE = SPRING;
+static int MODE = ADD_MODE;
 OrbList orbs;
 void setup() {
   size(1000, 800);
@@ -17,9 +19,13 @@ void draw() {
   orbs.processAll();
   orbs.display();
   fill(255);
-  rect(0,0,160,30);
+  rect(0,0,160,80);
   fill(0);
   text ("SPRING_CONSTANT: " + SPRING_CONSTANT, 05,15);
+  text ("SPRING_DAMPEN: " + SPRING_DAMPEN, 05,30);
+  text ("SPRING_LENGTH: " + SPRING_LENGTH, 05,45);
+  text ("GRAVITY: " + GRAVITY, 05,60);
+  text ("MODE: " + MODE, 05,75);
 }
 
 void keyPressed() {
@@ -28,7 +34,11 @@ void keyPressed() {
   } else if (key == '2') {
     SPRING_CONSTANT *= 0.995;
   } else if (key == '3') {
-    SPRING_DAMPEN *= 1.005;
+    if (SPRING_DAMPEN >= 1) {
+      SPRING_DAMPEN = 1;
+    } else {
+      SPRING_DAMPEN *= 1.005;
+    }
   } else if (key == '4') {
     SPRING_DAMPEN *= 0.995;
   } else if (key == '5') {
@@ -40,4 +50,14 @@ void keyPressed() {
   } else if (key == '8') {
     GRAVITY *= 0.995;
   }
+  
+  if (keyCode == 32) {
+   if (MODE == ADD_MODE) {
+     MODE = INSERT_MODE;
+    } else if (MODE == INSERT_MODE) {
+      MODE = DELETE_MODE;
+    } else {
+      MODE = ADD_MODE;
+    }
+  } 
 }

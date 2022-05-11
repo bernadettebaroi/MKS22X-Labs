@@ -52,3 +52,14 @@ public class OrbList {
     //advance current to next until it is null, display() each of the nodes
   }
 }
+
+void add(int xcor, OrbNode orb) {
+  OrbNode current = first;
+  while (current.next.x <= xcor || current.prev.x >= xcor) {
+    current = current.next;
+  }
+   orb.prev = current.prev;
+   orb.prev.next = orb;
+   orb.next = current;
+   current.prev = orb;
+}
