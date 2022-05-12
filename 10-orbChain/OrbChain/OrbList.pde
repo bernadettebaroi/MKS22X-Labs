@@ -51,15 +51,33 @@ public class OrbList {
     }
     //advance current to next until it is null, display() each of the nodes
   }
-}
-
-void add(int xcor, OrbNode orb) {
-  OrbNode current = first;
-  while (current.next.x <= xcor || current.prev.x >= xcor) {
-    current = current.next;
+  void add(int xcor, OrbNode orb) {
+    OrbNode current = first.next;
+    while (current.x < xcor && current.next != null ) {
+      current = current.next;
+    }
+     orb.prev = current.prev;
+     orb.prev.next = orb;
+     orb.next = current;
+     current.prev = orb;
   }
-   orb.prev = current.prev;
-   orb.prev.next = orb;
-   orb.next = current;
-   current.prev = orb;
+  
+  void delete(OrbNode target) {
+   target.prev.next = target.next;
+   target.next.prev = target.prev;
+  }
+  
+  OrbNode getNodeAt(int x, int y) {
+    OrbNode current = first.next;
+    while (current.x < x && current.next != null) {
+      current = current.next;
+    }
+    float distance = dist(x,y,current.x,current.y);
+    if (current.radius >= distance ) {
+      return current;
+    } else {
+      return null;
+    }
+  }
+  
 }

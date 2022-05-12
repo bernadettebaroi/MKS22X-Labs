@@ -11,9 +11,19 @@ void setup() {
   size(1000, 800);
   orbs = new OrbList();
 }
+
 void mouseClicked() {
-  orbs.add(new OrbNode(mouseX,mouseY,0,0,30));
+  if (MODE == ADD_MODE) {
+    orbs.add(new OrbNode(mouseX,mouseY,0,0,30));
+  } else if (MODE == INSERT_MODE) {
+    orbs.add(mouseX, new OrbNode(mouseX,mouseY,0,0,30));
+  } else if (MODE == DELETE_MODE) {
+    if (orbs.getNodeAt(mouseX, mouseY) != null) {
+      orbs.delete(orbs.getNodeAt(mouseX, mouseY));
+    }
+  }
 }
+
 void draw() {
   background(255);
   orbs.processAll();
