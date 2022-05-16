@@ -69,13 +69,13 @@ public class OrbList {
   
   OrbNode getNodeAt(int x, int y) {
     OrbNode current = first.next;
-    while (current.x < x && current.next != null) {
+    while (current.next != null && current.next.x < x) {
       current = current.next;
     }
     float distance = dist(x,y,current.x,current.y);
-    if (current.radius >= distance ) {
+    if (current.radius >= distance) {
       return current;
-    } else {
+    }  else {
       return null;
     }
   }
