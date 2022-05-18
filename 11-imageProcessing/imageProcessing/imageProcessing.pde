@@ -26,25 +26,25 @@ public class Kernel {
     if (x-1 >= 0) {
       c += img.get(x-1,y)*kernel[0][1];
     }
-    if (x+1 <= width) {
+    if (x+1 < width) {
       c += img.get(x+1,y)*kernel[2][1];
     }
     if (y-1 >=0) {
       c += img.get(x,y-1)*kernel[1][0];
     }
-    if (y+1 <= height) {
+    if (y+1 < height) {
       c += img.get(x,y+1)*kernel[1][2];
     }
-    if (x+1 <= width && y+1 <= height) {
+    if (x+1 < width && y+1 < height) {
       c += img.get(x-1,y)*kernel[2][2];
     }
     if (x-1 >= 0 && y-1 >= 0) {
       c += img.get(x-1,y)*kernel[0][0];
     }
-    if (x+1 <= width && y-1 >= 0) {
+    if (x+1 < width && y-1 >= 0) {
       c += img.get(x-1,y)*kernel[2][0];
     }
-    if (x-1 >= 0 && y+1 <= height) {
+    if (x-1 >= 0 && y+1 < height) {
       c += img.get(x-1,y)*kernel[0][2];
     }
     return c;
@@ -54,8 +54,8 @@ public class Kernel {
     *and saves the data to the destination.*/
   void apply(PImage source, PImage destination) {
     color c = 0;
-    for (int i = 1; i <= width; i ++) {
-      for (int j = 1; j <= height; j++) {
+    for (int i = 0; i < width; i ++) {
+      for (int j = 0; j < height; j++) {
         c = calcNewColor(source,i,j);
         destination.set(i,j,c);
       }
