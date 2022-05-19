@@ -59,7 +59,11 @@ void draw(){
   PImage output = car.copy();
   kernels[currentKernel].apply(car,output);
   image(car,0,0);
-  image(output,car.width,0);   
+  image(output,car.width,0); 
+  fill(255);
+  rect(0,0,115,20);
+  fill(0);
+  text ("MODE: " + names[currentKernel] , 05,15);
 }
 
 void keyPressed(){
@@ -69,7 +73,6 @@ void keyPressed(){
       currentKernel = 0;
     }
     draw(); 
-    println(names[currentKernel]); 
   }
 }  
 
